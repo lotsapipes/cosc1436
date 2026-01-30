@@ -1,10 +1,32 @@
 
+/*
+ * File header
+ * Name
+ * Lab #
+ * COSC 1436 Spring 2026
+ * /
+
+
+
 //some hello world lore i missed somewhere
 //a program for printing hello world:
 
 
-//no idea what this thing below is:
+//True multi-line comment format listed below
+/* blah blah
+ * blah
+ * blah
+ * forever
+ * blah
+ * proper formatting includes the asterisks at the start of each line
+*/
 #include <iostream>
+#include <cmath>
+
+
+
+
+
 
 
 void main()
