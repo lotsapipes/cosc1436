@@ -5,6 +5,14 @@
  */
 #include <iostream> //preprocessor directive to include the iostream library
 
+//Custom types
+//this section is about how the combination of many small things can create something meaningful
+struct Point
+{
+    double x;
+    double y;
+};
+
 
 //entry point for program execution
 void main() //void means this function does not return a value
@@ -57,8 +65,7 @@ void main() //void means this function does not return a value
     length = 10; // this is called WRITING to a variable using the ASSIGNMENT OPERATOR (=)
     width = 20;
     
-    std::cout << length;
-
+    
     // Types
     // PRIMATIVE types are understood by the language
     // a bit is either a 0 or a 1
@@ -110,21 +117,78 @@ void main() //void means this function does not return a value
     //this is why it's important to initialize variables before using them
     //always set it to 0, this is called zero initialization
 
-    int someVariable = 0; //because of everything we just went over this is how we're going to be doing it every time more likely than not
-    std::cin >> someVariable; //reading user input into someVariable 
-    int anotherValue = 10, anotherValueAgain = 20; //declaring multiple variables of the same type on one line
-    std::cout << someVariable;
+    int quotent = 10 / 3; // this will give us 3 instead of 3.3333 because both 10 and 3 are integers
+    //binary operator E op E; op is the operator and E is the operand
 
-    //inserting a breakpoint stops the program execution at a specific line for debugging purposes
-    //you do this by clicking in the margin to the left of the line number in Visual Studio
-    // a stepover allows you to execute one line of code at a time while debugging
-    // to create a stepover, press F10
-    //
-    // 
-    // 
-    //toggling the pin status of a window keeps it open while debugging
-    //toggling the pin status can also be done in other windows to keep them open but we probably won't be using this
+    //modulus operator (%) gives us the REMAINDER of a division operation
+    //binary operators + - * / % are also called arithmetic operators
+    //unary operators + and - can be used to indicate positive or negative numbers
+    
+    int remainder = 10 % 3; // this will give us 1 because 10 divided by 3 is 3 with a remainder of 1
+    int negativeNumber = -5; // this is how we indicate a negative number using the unary operator -
+    quotent = +quotent; // this is how we indicate a positive number using the unary operator +
+    double actualQuotent = 10.0 / 3.0; // this will give us 3.3333 because both 10.0 and 3.0 are floating point literals
 
+    //Calculate the perimeter of a rectangle
+    std::cout << "Enter the length of the rectangle: ";
+    std::cin >> length;
+
+    std::cout << "Enter the width of the rectangle: ";
+    std::cin >> width;
+
+    perimeter = length + length + width + width; // it's one way to do it, but we can also do it like this:
+    perimeter = 2 * (length +  width); // this is more efficient because it uses fewer operations
+    std::cout << "Perimeter = :" << perimeter << std::endl;
+
+    //Scope is its lifetime, when a variable is declared it has a scope, it can only be used within that scope
+    //a declared variable only exists within its own block
+    //nested blocks can access variables from their parent blocks, but not the other way around
+
+    //for whatever reason, this is how you add a block, no void main() necessary
+    {
+        std::string nestedBlockVariable = "I am a string literal, a class in a nested block, not a variable";
+        std::cout << "Enter any value to display the nested block string: ";
+        std::string userNestedInput;
+        std::cin >> userNestedInput;
+        std::cout << nestedBlockVariable << std::endl;
+        //re-note that strings are not primative types, they are actually a class in the std namespace
+        //languages can call on other languages, but C++ strings only work in C++
+
+    }
+
+    std::string someStringValue = "Concatenating...";
+    std::cout << someStringValue << std::endl;
+    someStringValue = someStringValue + "and it's concatenated. So it's not a 'variable', but it can be changed and stuff";
+    std::cout << someStringValue << std::endl;
+
+    //The escape sequences (\n, \t, \", \\) are used in string literals
+    //a string literal is a class in the std namespace
+    //namespace is a way to group related classes and functions together
+
+    //E, T, and S are used in the syntax rules to represent EXPRESSION, TYPE, and STATEMENT respectively
+    //These can be chained together to create more complex rules, for example:
+    //length = width = perimeter = 0; // this is a valid statement because it follows the rule S ::= E; and E ::= E op E; and E ::= T id; and T ::= int;
+    //S :: = E; means a statement is made of an expression followed by a semicolon
+    //E ::= E op E; means an expression can be made of two expressions and an operator
+    //E ::= T id; means an expression can be made of a type and an identifier (variable)
+    //T ::= int; means a type can be int
+    
+
+    //constant conventions below:
+    const int MaximumStudents = 30; // this is a constant variable, it cannot be changed after it's initialized
+    int largestNumberOfStudents; // Declare the variable before using it
+    largestNumberOfStudents = MaximumStudents; // we do it this way because we can change the value of MaximumStudents IN ONE PLACE
+    //doing it this way is for the purpose of MAINTAINABILITY
+
+    Point left;
+    std::cout << "Enter the X coordinate of the point: ";
+    std::cin >> left.x;
+
+    std::cout << "Enter the Y coordinate of the point: ";
+    std::cin >> left.y;
+
+    std::cout << "The point is (" << left.x << ", " << left.y << ")" << std::endl;
+    
 
 
     
