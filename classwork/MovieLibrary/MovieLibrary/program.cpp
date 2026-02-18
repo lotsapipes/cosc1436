@@ -8,6 +8,9 @@
 #include <string>
 #include <iomanip>
 
+//NOTES: pushing didn't work, error messages saying to pull and then push, also failed, then error messages offering to REBASE or something else.
+//figure it out later
+
 struct Movie
     //don't forget, a Struct is a user-defined data type that can hold multiple values of different types. 
     // It's a way to group related data together. In this case, we have a Movie struct that has several fields: 
