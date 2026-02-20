@@ -31,6 +31,50 @@ struct Movie
 
 void main()
 {
+    //we're going to create a menu display showing the following things: main menu, ----, a(dd movie, e)dit movie, d)elete movie, v)iew movie, and ?
+
+    std::cout << "Main Menu" << std::endl;
+    std::cout << "-----------------" << std::endl;
+    std::cout << "a) Add Movie" << std::endl;
+    std::cout << "e) Edit Movie" << std::endl;
+    std::cout << "d) Delete Movie" << std::endl;
+    std::cout << "v) View Movie" << std::endl;
+    std::cout << "?) Help" << std::endl;
+
+    char choice;
+    std::cin >> choice;
+
+    //NOTE: still need to study how if, else if, else stuff works
+
+    if (choice == 'a' || choice == 'A') {
+        std::cout << "You chose to add a movie!" << std::endl;
+    }
+    else if (choice == 'e' || choice == 'E') {
+        std::cout << "You chose to edit a movie!" << std::endl;
+    }
+    else if (choice == 'd' || choice == 'D') {
+        std::cout << "You chose to delete a movie!" << std::endl;
+    }
+    else if (choice == 'v' || choice == 'V') {
+        std::cout << "You chose to view a movie!" << std::endl;
+    }
+    else if (choice == '?') {
+        std::cout << "Help menu coming soon!" << std::endl;
+    }
+    while (choice != 'a' && choice != 'A' && choice != 'e' && choice != 'E' && choice != 'd' && choice != 'D' && choice != 'v' && choice != 'V' && choice != '?') {
+        std::cout << "Invalid choice. Please enter a valid option." << std::endl;
+        std::cin.clear(); // this clears the error state of the input stream, hopefully, check later
+        std::cin >> choice;
+    }
+    //NOTE: below...
+    //if (true)
+    // {
+    //if (false)
+    // }
+    //else
+    
+
+
     Movie movie;
 
     std::cout << "Enter the movie title: ";
@@ -63,13 +107,27 @@ void main()
     // these || are called logical OR operators, they are used to combine two conditions and return true if either condition is true.
     // technically though, at this point in the class, we'll be using two separate if statements:
 
-    /* if (movie.releaseYear < 1900 || movie.releaseYear > 2100) {
-            std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
-            std::cin >> movie.releaseYear;
+    //fixed the stuff below by changing from an "IF" to a "WHILE"
+    while (movie.releaseYear < 1900 || movie.releaseYear > 2100) {
+        std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
+        movie.releaseYear = 0;
+        std::cin >> movie.releaseYear;
+        std::cin.clear(); // this clears the error state of the input stream
+        //interestingly, if you put in a char instead of a number, it infinitely loops, this is because when you enter a char, 
+        // it fails to read it as an integer and leaves the input stream in a failed state.
+        // To fix this, we can clear the input stream and ignore the invalid input before asking for the release year again.
     }
-    */
 
-    if (movie.releaseYear < 1900) {
+     //spent some time going over && and || operators
+     //short circuit evaluation is a concept in programming where the evaluation of a logical expression is instant on the first condition A || B
+     // it's default.
+     //alternatively to short circuit evaluation, we can use BITWISE operators & and |
+     //BITWISE operators are used to perform operations on individual bits of data. They are represented by the symbols &, |, ^, ~, <<, and >>.
+
+
+
+
+    /*if (movie.releaseYear < 1900) {
             std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
             std::cin >> movie.releaseYear;
     }
@@ -77,10 +135,17 @@ void main()
             std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
             std::cin >> movie.releaseYear;
     }
+    */
+
+     //if else statements are more PERFORMANT than multiple if statements because they only evaluate one condition, 
+     // whereas multiple if statements will evaluate all conditions even if one is already true.
+     //below we'll rewrite the /**/ commented out code using if, else if, else statements which will cover everything including the invalid input case.
 
 
 
-    std::cout << "Enter the movie user rating (0.0 - 5.0): ";
+
+
+    /* std::cout << "Enter the movie user rating (0.0 - 5.0): ";
     std::cin >> movie.userRating;
     std::cout << "Is this movie a classic? (Y/N): ";
     std::cin >> movie.isClassic;
@@ -89,50 +154,58 @@ void main()
     }
     if (movie.isClassic == 'N' || movie.isClassic == 'n') {
         movie.isClassic = false;
+        */
+
+
+
+
+    //NOTE: below is where i got lost in class because i had to fix something newbie
+    // i think all we need to do is make sure the if else thingy is working
+
+    if (movie.isClassic == 'Y' || movie.isClassic == 'y')
+        movie.isClassic = true;
+    else if (movie.isClassic == 'N' || movie.isClassic == 'n')
+        movie.isClassic = false;
+    else {
+        std::cout << "Invalid input. Please enter Y or N: ";
+        std::cin >> movie.isClassic;
+
+
+
+
+
+
+        if (movie.isClassic != 'Y')
+            if (movie.isClassic != 'y')
+                if (movie.isClassic != 'N')
+                    if (movie.isClassic != 'n')
+                        std::cout << "Invalid input. Please enter Y or N: ";
+        std::cin >> movie.isClassic;
+
+
+        std::cout << "Movie Title: " << movie.title << std::endl;
+        std::cout << "Genres: " << movie.genres << std::endl;
+        std::cout << "Run Length: " << movie.runLength << " minutes" << std::endl;
+        std::cout << "Release Year: " << movie.releaseYear << std::endl;
+        std::cout << "User Rating: " << std::fixed << std::setprecision(1) << movie.userRating << " / 5.0" << std::endl;
+        // the question mark below is a ternary operator, it's a shorthand way of writing an if-else statement. 
+        // It takes three operands: a condition, a value if the condition is true, and a value if the condition is false. 
+        // In this case, we're checking if movie.isClassic is true, if it is, we return "Yes", otherwise we return "No".
+        //NOTE: i actually have no idea why this works.
+        std::cout << "Is Classic: " << (movie.isClassic ? "Yes" : "No") << std::endl;
+        std::cout << "Description: " << movie.description << std::endl;
+
+
+
 }
 //this is a nested if method of doing things
 // this is frowned up tho
     //NOTE: this thing's only checking for errors once, also have no idea how to fix it right now.
-  if (movie.isClassic != 'Y')
-        if (movie.isClassic != 'y')
-            if (movie.isClassic != 'N')
-                if (movie.isClassic != 'n') 
-                    std::cout << "Invalid input. Please enter Y or N: ";
-                    std::cin >> movie.isClassic;
-                
-
-    std::cout << "Movie Title: " << movie.title << std::endl;
-    std::cout << "Genres: " << movie.genres << std::endl;
-    std::cout << "Run Length: " << movie.runLength << " minutes" << std::endl;
-    std::cout << "Release Year: " << movie.releaseYear << std::endl;
-    std::cout << "User Rating: " << std::fixed << std::setprecision(1) << movie.userRating << " / 5.0" << std::endl;
-    // the question mark below is a ternary operator, it's a shorthand way of writing an if-else statement. 
-    // It takes three operands: a condition, a value if the condition is true, and a value if the condition is false. 
-    // In this case, we're checking if movie.isClassic is true, if it is, we return "Yes", otherwise we return "No".
-    //NOTE: i actually have no idea why this works.
-    std::cout << "Is Classic: " << (movie.isClassic ? "Yes" : "No") << std::endl;
-    std::cout << "Description: " << movie.description << std::endl;
-
-    
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     //relational operators are used to compare two values and return a boolean result (true or false)
