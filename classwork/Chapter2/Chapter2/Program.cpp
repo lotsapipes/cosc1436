@@ -15,7 +15,7 @@ struct Point
 
 
 //entry point for program execution
-void main() //void means this function does not return a value
+int main() //void means this function does not return a value
 {
  // Your code goes here
 
@@ -180,14 +180,7 @@ void main() //void means this function does not return a value
     largestNumberOfStudents = MaximumStudents; // we do it this way because we can change the value of MaximumStudents IN ONE PLACE
     //doing it this way is for the purpose of MAINTAINABILITY
 
-    Point left;
-    std::cout << "Enter the X coordinate of the point: ";
-    std::cin >> left.x;
 
-    std::cout << "Enter the Y coordinate of the point: ";
-    std::cin >> left.y;
-
-    std::cout << "The point is (" << left.x << ", " << left.y << ")" << std::endl;
     
 
 

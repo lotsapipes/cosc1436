@@ -17,7 +17,7 @@
 
 
 
-void main()
+int main()
 {
     
     double mathvalue;
@@ -101,13 +101,14 @@ void main()
 
     std::string name;
     std::cout << "Enter your name: ";
+    std::cin >> name;
 
     //philosophy stuff, workarounds for dealing with how cin and getline don't mix well
-    std::cin.ignore(INT32_MAX, '\n');
+    //std::cin.ignore(INT32_MAX, '\n');
     //so, below we're going to fix the std::getline issue by adding this:
     //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::getline(std::cin, name);
+    //std::getline(std::cin, name);
 
     std::cout << "Hello, " << name << std::endl;
 
