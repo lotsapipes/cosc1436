@@ -46,6 +46,40 @@ void main()
 
     //NOTE: still need to study how if, else if, else stuff works
 
+    //so, for the code below, it's possible to use something else called a Switch Statement. The general
+    //way that a switch statement works is that you have a variable (in this case, choice) and then 
+    //you have different cases for each possible value of that variable.
+
+    //missed some parts talking about something called FALLTHROUGH (which sometimes we actually want for some reason)
+    //the fix is apparently to use BREAKS
+    //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
+    
+
+    switch (choice) {
+        case 'A':
+        case 'a':
+            std::cout << "You chose to add a movie!" << std::endl;break;
+        case 'E':
+        case 'e':
+            std::cout << "You chose to edit a movie!" << std::endl;break;
+        case 'D':
+        case 'd':
+            std::cout << "You chose to delete a movie!" << std::endl;
+            break;
+        case 'V':
+        case 'v':
+            std::cout << "You chose to view a movie!" << std::endl;
+            break;
+        case '?':
+            std::cout << "Help menu coming soon!" << std::endl;
+            break;
+        default:
+            std::cout << "Invalid choice. Please enter a valid option." << std::endl;
+            break;
+    }
+
+
+   /*
     if (choice == 'a' || choice == 'A') {
         std::cout << "You chose to add a movie!" << std::endl;
     }
@@ -66,18 +100,23 @@ void main()
         std::cin.clear(); // this clears the error state of the input stream, hopefully, check later
         std::cin >> choice;
     }
+
+    */
+
+
     //NOTE: below...
     //if (true)
     // {
     //if (false)
     // }
     //else
-    
+
 
 
     Movie movie;
 
     std::cout << "Enter the movie title: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, movie.title); // this is how we read in a string with spaces (yup)
     //TODO: validate the movie title to make sure it's not empty or too long (maybe we can use a loop to keep asking until we get a valid title)
 
@@ -90,29 +129,35 @@ void main()
     //TODO: validate the run length to make sure it's a positive integer (maybe we can use a loop to keep asking until we get a valid run length)
 
     //NOTE: bracket placement on these ones below? ah, found it, it's called a BLOCK STATEMENT, notes below:
+
     if (movie.runLength < 0) {
         std::cout << "Invalid run length. Please enter a positive integer: ";
         std::cin >> movie.runLength;
     }
+
     //block statement is a group of statements that are enclosed in curly braces {}. 
     // They are used to define the scope of variables and to group related statements together. 
     // In this case, we have an if statement that checks if the run length is less than 0. 
     // If it is, we print an error message and ask the user to enter a valid run length. 
     // The block of code inside the if statement will only be executed if the condition is true.
 
+    //clearing the input buffer below like this:
+    std::cin.clear();
+
     std::cout << "Enter the movie release year (1900 - 2100): ";
     std::cin >> movie.releaseYear;
+
     //TODO: validate the release year to make sure it's between 1900 and 2100 (maybe we can use a loop to keep asking until we get a valid release year)
 
     // these || are called logical OR operators, they are used to combine two conditions and return true if either condition is true.
     // technically though, at this point in the class, we'll be using two separate if statements:
 
     //fixed the stuff below by changing from an "IF" to a "WHILE"
-    while (movie.releaseYear < 1900 || movie.releaseYear > 2100) {
+    if (movie.releaseYear < 1900 || movie.releaseYear > 2100) {
         std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
         movie.releaseYear = 0;
         std::cin >> movie.releaseYear;
-        std::cin.clear(); // this clears the error state of the input stream
+         // this clears the error state of the input stream
         //interestingly, if you put in a char instead of a number, it infinitely loops, this is because when you enter a char, 
         // it fails to read it as an integer and leaves the input stream in a failed state.
         // To fix this, we can clear the input stream and ignore the invalid input before asking for the release year again.
@@ -145,7 +190,7 @@ void main()
 
 
 
-    /* std::cout << "Enter the movie user rating (0.0 - 5.0): ";
+    std::cout << "Enter the movie user rating (0.0 - 5.0): ";
     std::cin >> movie.userRating;
     std::cout << "Is this movie a classic? (Y/N): ";
     std::cin >> movie.isClassic;
@@ -154,7 +199,7 @@ void main()
     }
     if (movie.isClassic == 'N' || movie.isClassic == 'n') {
         movie.isClassic = false;
-        */
+
 
 
 
@@ -162,25 +207,7 @@ void main()
     //NOTE: below is where i got lost in class because i had to fix something newbie
     // i think all we need to do is make sure the if else thingy is working
 
-    if (movie.isClassic == 'Y' || movie.isClassic == 'y')
-        movie.isClassic = true;
-    else if (movie.isClassic == 'N' || movie.isClassic == 'n')
-        movie.isClassic = false;
-    else {
-        std::cout << "Invalid input. Please enter Y or N: ";
-        std::cin >> movie.isClassic;
 
-
-
-
-
-
-        if (movie.isClassic != 'Y')
-            if (movie.isClassic != 'y')
-                if (movie.isClassic != 'N')
-                    if (movie.isClassic != 'n')
-                        std::cout << "Invalid input. Please enter Y or N: ";
-        std::cin >> movie.isClassic;
 
 
         std::cout << "Movie Title: " << movie.title << std::endl;
@@ -192,49 +219,55 @@ void main()
         // It takes three operands: a condition, a value if the condition is true, and a value if the condition is false. 
         // In this case, we're checking if movie.isClassic is true, if it is, we return "Yes", otherwise we return "No".
         //NOTE: i actually have no idea why this works.
+        //actually, it's because the first slot is the true slot (where yes is) and the second slot is the false slot (where no is),
+        // so if movie.isClassic is true, it will return "Yes", otherwise it will return "No".
         std::cout << "Is Classic: " << (movie.isClassic ? "Yes" : "No") << std::endl;
+        //it's called the Conditional Operator and it's popular
+
+
+
         std::cout << "Description: " << movie.description << std::endl;
 
 
 
-}
-//this is a nested if method of doing things
-// this is frowned up tho
-    //NOTE: this thing's only checking for errors once, also have no idea how to fix it right now.
+    }
+    //this is a nested if method of doing things
+    // this is frowned up tho
+        //NOTE: this thing's only checking for errors once, also have no idea how to fix it right now.
 
 
 
 
-    //----------------------------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    //relational operators are used to compare two values and return a boolean result (true or false)
-    // it does this using the operators: ==, !=, <, >, <=, >=
+        //relational operators are used to compare two values and return a boolean result (true or false)
+        // it does this using the operators: ==, !=, <, >, <=, >=
 
-    // to review, Presedence means the order in which operators are evaluated in an expression. It's the same thing as Order of Operations
+        // to review, Presedence means the order in which operators are evaluated in an expression. It's the same thing as Order of Operations
 
-    //kind of worth noting to see how booleans work
-    //int x = 5;
-    //int y = 10;
-    //bool areEqual = (x == y); // this will be false because 5 is not equal to 10
-    //however, we have to be careful we use the = and == carefully because if we:
-    //bool isEqual = (x = y); // this will assign the value of y (10) to x and then evaluate to true
+        //kind of worth noting to see how booleans work
+        //int x = 5;
+        //int y = 10;
+        //bool areEqual = (x == y); // this will be false because 5 is not equal to 10
+        //however, we have to be careful we use the = and == carefully because if we:
+        //bool isEqual = (x = y); // this will assign the value of y (10) to x and then evaluate to true
 
-    //it's best not to use floating points with relational operators because of precision issues. it's a recurring theme we need to take note of
-    //however, we can use them with integers because they are exact values.
+        //it's best not to use floating points with relational operators because of precision issues. it's a recurring theme we need to take note of
+        //however, we can use them with integers because they are exact values.
 
-    //C++ is a case sensitive language like linux so we probably don't have to pay too much attention to this because it makes sense already
-    //still kind of important to note that we're talking about when we're comparing strings or chars in this context
+        //C++ is a case sensitive language like linux so we probably don't have to pay too much attention to this because it makes sense already
+        //still kind of important to note that we're talking about when we're comparing strings or chars in this context
 
 
-    //NOTE: go ahead and hop on Copilot and figure out how comparing strings below works.
-    //NOTE: also make sure to cover how strings only work in C or something like that, whatever it was
+        //NOTE: go ahead and hop on Copilot and figure out how comparing strings below works.
+        //NOTE: also make sure to cover how strings only work in C or something like that, whatever it was
 
-    //std::string firstName = "Bob";
-    //std::string lastName = "bob";
+        //std::string firstName = "Bob";
+        //std::string lastName = "bob";
 
-    //bool isSingularName = firstName == lastName; //
+        //bool isSingularName = firstName == lastName; //
 
-    //int result = _strcmpi("Bob", "bob"); //
-    //isSingularName = _strcmpi(firstName.c_str(), lastName.c_str()) == 0; //
+        //int result = _strcmpi("Bob", "bob"); //
+        //isSingularName = _strcmpi(firstName.c_str(), lastName.c_str()) == 0; //
 }
