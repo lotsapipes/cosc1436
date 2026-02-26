@@ -5,10 +5,11 @@
 * Spring 2026
 */
 
-//git push
-//git commit -m "required message goes here"
-
 //git add .
+//git commit -m "required message goes here"
+//git push
+
+
 
 #include <iostream>
 #include <iomanip>
