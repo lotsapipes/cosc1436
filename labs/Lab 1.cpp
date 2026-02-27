@@ -5,6 +5,7 @@
 * Spring 2026
 */
 
+//leaving these comments in because we're dealing with github syncing problems just trying to get the assignment in at all
 //git add .
 //git commit -m "required message goes here"
 //git push
@@ -75,16 +76,16 @@ std::cout << "-----------------------------------\n";
 std::cout << "Student Name: " << studentName << "\n\n";
 
 std::cout << "Here's your Lab grades, " << studentName << ":\n";
-std::cout << "Lab 1: " << labs.labOne << std::endl; //swap with \n if this don't work
+std::cout << "Lab 1: " << labs.labOne << std::endl;
 std::cout << "Lab 2: " << labs.labTwo << std::endl;
 std::cout << "Lab 3: " << labs.labThree << std::endl;
 std::cout << "Lab 4: " << labs.labFour << std::endl;
 std::cout << std::endl;
 
 std::cout << "Here's your Exam grades, " << studentName << ":\n";
-std::cout << "Exam 1: " << exams.examOne << std::endl; //swap with \n if this don't work
-std::cout << "Exam 2: " << exams.examTwo << std::endl; //swap with \n if this don't work
-std::cout << "Exam 3: " << exams.examThree << std::endl; //swap with \n if this don't work
+std::cout << "Exam 1: " << exams.examOne << std::endl;
+std::cout << "Exam 2: " << exams.examTwo << std::endl;
+std::cout << "Exam 3: " << exams.examThree << std::endl;
 std::cout << std::endl;
 
 std::cout << "Your other grades are below, " << studentName << ":\n";
@@ -114,6 +115,7 @@ std::cout << "Final Course Grade :" << weightedFinal << "%\n";
 std::cout << std::endl;
 std::cout << std::endl;
 
-//swapping int main for void main and commenting out this return 0
+//swapping int main() for void main() and commenting out this return 0
 //return 0;
 }
+
