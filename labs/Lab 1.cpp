@@ -8,12 +8,15 @@
 //git add .
 //git commit -m "required message goes here"
 //git push
-
+//git pull --rebase origin main 
+//OR MORE LIKELY:
+//git pull --rebase main
 
 #include <iostream>
 #include <iomanip>
+#include <string>
 
-int main() {
+void main() {
 
 std::cout << "Robert Pace\n";
 std::cout << "COSC 1436-21005\n";
@@ -34,18 +37,13 @@ struct examGrades{
     double examThree;
 };
 
-
 labGrades labs;
 examGrades exams;
-//the part above, pay attention to that
 
 double participation, finalExam;
 
 std::cout << "Enter student name: ";
 std::getline(std::cin, studentName);
-
-//also, note below, the part we got stuck on fits right there
-//into the first slot thingy of the variable
 
 std::cout << "Enter 4 Lab grades below (1-100, then press Enter after inputting each one):\n";
 std::cout << "Lab 1: ";
@@ -93,27 +91,17 @@ std::cout << "Your other grades are below, " << studentName << ":\n";
 std::cout << "Participation: " << participation << "\n";
 std::cout << "Final Exam: " << finalExam << "\n";
 
-
-//can't remember if we're allowed to use for loops to do the math here or not
-//double check later, if not, just format this a little better
-//so it don't look so bad
-
 double labTotal = labs.labOne + labs.labTwo + labs.labThree +labs.labFour;
 double labAverage = labTotal / 4.0;
 
 double examTotal = exams.examOne + exams.examTwo + exams.examThree;
 double examAverage = examTotal / 3.0;
 
-
- //IMPORTANT: double check these weights against the stories or whatever
  double weightedFinal = (labAverage * 0.65) +
                         (examAverage * 0.20) +
                         (participation * 0.05) +
                         (finalExam * 0.10);
 
-
-//note, there's a typo above somewhere where i forgot to type the %
-//marks, add them later
 std::cout << std::fixed << std::setprecision(2);
 std::cout << "\nHere's your final Class Grade calculations, " << studentName << ":\n";
 std::cout << "-----------------------------------\n";
@@ -126,8 +114,6 @@ std::cout << "Final Course Grade :" << weightedFinal << "%\n";
 std::cout << std::endl;
 std::cout << std::endl;
 
-//don't forget to swap out the int main above for a void main
-//as well as removing the return zero below
-
-return 0;
+//swapping int main for void main and commenting out this return 0
+//return 0;
 }
