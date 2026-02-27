@@ -8,6 +8,25 @@
 #include <string>
 #include <iomanip>
 
+// covering topics such as 
+// ENUMERATION, subrange of int, enum id {}
+// 
+
+//we're outside of braces ftr
+MENU_COMMAND input;
+input = ADD;
+std::cin >> (int)input;
+std::cout << input;
+
+switch (input)
+{
+
+    //logic or something goes here
+}
+
+
+
+
 //NOTES: pushing didn't work, error messages saying to pull and then push, also failed, then error messages offering to REBASE or something else.
 //figure it out later
 

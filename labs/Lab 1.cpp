@@ -10,11 +10,8 @@
 //git push
 
 
-
 #include <iostream>
 #include <iomanip>
-
-//also not allowed to use namespace for good reason
 
 int main() {
 
@@ -37,8 +34,7 @@ struct examGrades{
     double examThree;
 };
 
-//this part below is where i got stuck, it's super important and we need
-// to know it when we're creating Strcuts:
+
 labGrades labs;
 examGrades exams;
 //the part above, pay attention to that
