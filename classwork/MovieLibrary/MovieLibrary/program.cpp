@@ -8,21 +8,30 @@
 #include <string>
 #include <iomanip>
 
+//new day of notes, talking about how it's usually good practice to keep the variables nearby to where they're being used instead of stacking
+//them all at the top like we were doing before
+
 // covering topics such as 
 // ENUMERATION, subrange of int, enum id {}
 // 
 
 //we're outside of braces ftr
-MENU_COMMAND input;
-input = ADD;
-std::cin >> (int)input;
-std::cout << input;
+//MENU_COMMAND input;
+//input = ADD;
+//std::cin >> (int)input;
+//std::cout << input;
 
-switch (input)
-{
+//finally got the assignment in, showing up late to take notes, here goes:
+//
+//covering prefixes and postfixes with increments and decrements ++x x++ --x -xx (doing x + 1 or x - 1)
+
+
+
+//switch (input)
+//{
 
     //logic or something goes here
-}
+//}
 
 
 
@@ -40,63 +49,101 @@ struct Movie
     std::string title;
     std::string genres;
 
-    int runLength;
-    int releaseYear;
-    double userRating;
-    char isClassic;
+    int runLength = 0;
+    int releaseYear = 0;
+    double userRating = 0;
+    char isClassic = false;
     std::string description;
 
 };
 
 void main()
 {
+
+
+    
+    
+    //the prefix postfix thing is REQUIRED and HEAVILY, HEAVILY USED
+    int someValue = 20;
+    std::cout << someValue << std::endl;
+
+    ++someValue;
+    std::cout << someValue << std::endl;
+
+    someValue++;
+    std::cout << someValue << std::endl;
+
+    --someValue;
+    std::cout << someValue << std::endl;
+
+    someValue--;
+    std::cout << someValue << std::endl;
+
+    
+    
+    
+    //figure out how this part works later
+    //while (input == (MenuCommand)0)
+    
+    
     //we're going to create a menu display showing the following things: main menu, ----, a(dd movie, e)dit movie, d)elete movie, v)iew movie, and ?
 
-    std::cout << "Main Menu" << std::endl;
-    std::cout << "-----------------" << std::endl;
-    std::cout << "a) Add Movie" << std::endl;
-    std::cout << "e) Edit Movie" << std::endl;
-    std::cout << "d) Delete Movie" << std::endl;
-    std::cout << "v) View Movie" << std::endl;
-    std::cout << "?) Help" << std::endl;
+    //careful, wrapping this while around the entire menu
+    //while (input == (MenuCommand)0)
+    //{
 
-    char choice;
-    std::cin >> choice;
+    //2nd day of talking about wrapping this thing in a while loop all the way down including the part where it displays the actual
+    //movie information to the user and everything
+    //we also spent time moving variables around including "promoting" some of these variables to a spot outside of 2 or more blocks so multiple
+    //blocks could use them.
 
-    //NOTE: still need to study how if, else if, else stuff works
 
-    //so, for the code below, it's possible to use something else called a Switch Statement. The general
-    //way that a switch statement works is that you have a variable (in this case, choice) and then 
-    //you have different cases for each possible value of that variable.
+        std::cout << "Main Menu" << std::endl;
+        std::cout << "-----------------" << std::endl;
+        std::cout << "a) Add Movie" << std::endl;
+        std::cout << "e) Edit Movie" << std::endl;
+        std::cout << "d) Delete Movie" << std::endl;
+        std::cout << "v) View Movie" << std::endl;
+        std::cout << "?) Help" << std::endl;
+        std::cout << "Pick one of the letters from the menu to continue: ";
 
-    //missed some parts talking about something called FALLTHROUGH (which sometimes we actually want for some reason)
-    //the fix is apparently to use BREAKS
-    //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
-    
+        char choice;
+        std::cin >> choice;
 
-    switch (choice) {
-        case 'A':
-        case 'a':
-            std::cout << "You chose to add a movie!" << std::endl;break;
-        case 'E':
-        case 'e':
-            std::cout << "You chose to edit a movie!" << std::endl;break;
-        case 'D':
-        case 'd':
-            std::cout << "You chose to delete a movie!" << std::endl;
-            break;
-        case 'V':
-        case 'v':
-            std::cout << "You chose to view a movie!" << std::endl;
-            break;
-        case '?':
-            std::cout << "Help menu coming soon!" << std::endl;
-            break;
-        default:
-            std::cout << "Invalid choice. Please enter a valid option." << std::endl;
-            break;
-    }
+        //NOTE: still need to study how if, else if, else stuff works
 
+        //so, for the code below, it's possible to use something else called a Switch Statement. The general
+        //way that a switch statement works is that you have a variable (in this case, choice) and then 
+        //you have different cases for each possible value of that variable.
+
+        //missed some parts talking about something called FALLTHROUGH (which sometimes we actually want for some reason)
+        //the fix is apparently to use BREAKS
+        //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
+
+
+        switch (choice) {
+            case 'A':
+            case 'a':
+                std::cout << "You chose to add a movie!" << std::endl;break;
+            case 'E':
+            case 'e':
+                std::cout << "You chose to edit a movie!" << std::endl;break;
+            case 'D':
+            case 'd':
+                std::cout << "You chose to delete a movie!" << std::endl;
+                break;
+            case 'V':
+            case 'v':
+                std::cout << "You chose to view a movie!" << std::endl;
+                break;
+            case '?':
+                std::cout << "Help menu coming soon!" << std::endl;
+                break;
+            default:
+                std::cout << "Invalid choice. Please enter a valid option." << std::endl;
+                break;
+        }
+   // }
 
    /*
     if (choice == 'a' || choice == 'A') {

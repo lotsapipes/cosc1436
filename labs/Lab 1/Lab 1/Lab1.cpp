@@ -5,10 +5,13 @@
 * Spring 2026
 */
 
+//leaving these comments in because we're dealing with github syncing problems just trying to get the assignment in at all
 //git add .
 //git commit -m "required message goes here"
 //git push
-
+//git pull --rebase origin main 
+//OR MORE LIKELY:
+//git pull --rebase main
 
 #include <iostream>
 #include <iomanip>
@@ -43,7 +46,6 @@ void main() {
     std::cout << "Enter student name: ";
     std::getline(std::cin, studentName);
 
-
     std::cout << "Enter 4 Lab grades below (1-100, then press Enter after inputting each one):\n";
     std::cout << "Lab 1: ";
     std::cin >> labs.labOne;
@@ -74,7 +76,7 @@ void main() {
     std::cout << "Student Name: " << studentName << "\n\n";
 
     std::cout << "Here's your Lab grades, " << studentName << ":\n";
-    std::cout << "Lab 1: " << labs.labOne << std::endl; //swap with \n if this don't work
+    std::cout << "Lab 1: " << labs.labOne << std::endl;
     std::cout << "Lab 2: " << labs.labTwo << std::endl;
     std::cout << "Lab 3: " << labs.labThree << std::endl;
     std::cout << "Lab 4: " << labs.labFour << std::endl;
@@ -113,8 +115,6 @@ void main() {
     std::cout << std::endl;
     std::cout << std::endl;
 
-    //don't forget to swap out the int main above for a void main
-    //as well as removing the return zero below
-
+    //swapping int main() for void main() and commenting out this return 0
     //return 0;
 }
