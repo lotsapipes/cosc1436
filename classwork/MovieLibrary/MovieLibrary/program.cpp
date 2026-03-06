@@ -8,6 +8,21 @@
 #include <string>
 #include <iomanip>
 
+#include <limits>
+//IMPORTANT:this preprocessor directive was needed for the thing to compile in Codespaces. Without it, it'd crash.
+// this line of code is what it fixed:
+//std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+#define main() main(void)
+//next we'll be trying this to see if it can transplant into codespaces properly
+
+
+
+//another new day of notes. looks like we're continuing to cover 'do while' stuff, covering 'break's
+//i think there was a part about 'break' philosophy i missed somewhere
+//while(!quit)
+//'case' (what's case again?)
+
 //new day of notes, talking about how it's usually good practice to keep the variables nearby to where they're being used instead of stacking
 //them all at the top like we were doing before
 
