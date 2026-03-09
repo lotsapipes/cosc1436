@@ -18,10 +18,28 @@
 
 
 
+//this is the section that will have everything we need to complete lab 2
+
+
+//we attempted various compilation things to see if we could get void main() to work for fun.
+//g++ main.cpp -o main (this is the standard compile command)
+//g++ -std=gnu++17 main.cpp -o main (this bends the rules a little bit)
+//g++ -fpermissive main.cpp -o main (this one's even more permissive)
+
+
+
+
 //another new day of notes. looks like we're continuing to cover 'do while' stuff, covering 'break's
 //i think there was a part about 'break' philosophy i missed somewhere
 //while(!quit)
 //'case' (what's case again?)
+
+
+
+
+
+
+
 
 //new day of notes, talking about how it's usually good practice to keep the variables nearby to where they're being used instead of stacking
 //them all at the top like we were doing before
@@ -72,8 +90,35 @@ struct Movie
 
 };
 
-void main()
+int main()
 {
+
+    //demo nested loops
+    //something about how we'll be graded on whether or not we're using the correct loop for the job
+    //for, while, and the do while
+    //how these are pretest and posttest
+
+    for (int x = 0; x < 50; ++x)
+    {
+        for (int y = 0; y < 20; ++y)
+        {
+            std::cout << x + y << std::endl;
+
+            if (y != 0 && y % 10 == 0)
+                break;
+        }
+        if (x != 0 && x % 10 == 0)
+        {
+            std::cout << "quit?";
+            int choice;
+            std::cin >> choice;
+            if (choice != 0)
+                break;
+
+        } 
+
+    }
+
 
 
     
@@ -351,4 +396,7 @@ void main()
 
         //int result = _strcmpi("Bob", "bob"); //
         //isSingularName = _strcmpi(firstName.c_str(), lastName.c_str()) == 0; //
+
+    return 0;
+
 }
