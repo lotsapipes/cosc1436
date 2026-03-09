@@ -197,7 +197,7 @@ void main()
     Movie movie;
 
     std::cout << "Enter the movie title: ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, movie.title); // this is how we read in a string with spaces (yup)
     //TODO: validate the movie title to make sure it's not empty or too long (maybe we can use a loop to keep asking until we get a valid title)
 
