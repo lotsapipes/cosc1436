@@ -1,13 +1,13 @@
-
-
+/*
+Lab2: Loan Payments and Interest
+Robert Pace
+COSC-1436-21005; Spring 2026
+*/
 
 //main things to fix
 //it can break if you try putting in fractions of pennies
-//table isn't built properly
-
-
-
-
+//table isn't built properly. it needs a 'fill' instead of what we have
+//we're not supposed to ask for the payment every month, it's just a one-time ask
 
 #include <iostream>
 #include <iomanip>
@@ -16,12 +16,21 @@
 //those long input buffer
 #include <limits>
 
-//random notes to self
-//the std:: namespace stuff applies even to the iomanip stuff
+
+//because of the functions we'll have to figure out the proper way of how to print something like this.
+//it can't go into main because it'd be in the wrong order
+std::cout << "Lab2: Loan Payments and Interest\n";
+std::cout << "Robert Pace\n";
+std::cout << "COSC-1436-21005";
+
 
 
 //yup, these aren't variables, they're Functions
 //also called 'Function Prototypes'; we may rename these later too so it's intuitive
+
+//because this function is the very first thing called in the program, it basically scrolls
+//all the way down and just starts running that part at the bottom first instead
+//of int main
 double getLoanAmount();
 double getInterestRate();
 double getMonthlyPayment(double remainingBalance);
@@ -43,7 +52,11 @@ double totalPaid = 0;
 //even be called a preprocessor directive, it's different like strings
 std::cout << std::fixed << std::setprecision(2);
 //below is a string format i'm not sure we've covered in class or not, double check for proper formatting
-std::cout << "\n" << std::string(80, '=') << std::endl;
+
+//=================================================================================================================
+//i don't think this part's right, i think we had a 'fill' of some sort for this.
+//also, the format goes in this order: month, balance, payment, interest, new balance
+std::cout << "\n" << std::string(100, '=') << std::endl;
 std::cout << std::setw(20) << "Month";
 std::cout << std::setw(20) << "Payment";  
 std::cout << std::setw(20) << "Interest";
@@ -80,9 +93,9 @@ std::cout << std::setw(20) << remainingBalance << std::endl;
 //off early
 
 }
-
-
-std::cout << std::string(80, '-') << std::endl;
+//========================================================================================
+//i don't think this part's right, i think we had a 'fill' of some sort for this.
+std::cout << std::string(100, '-') << std::endl;
 std::cout << "\nSummary of Loan:" << std::endl;
 std::cout << "Initial Loan Amount: $" << loanAmount << std::endl;
 std::cout << "Total Amount Paid: $" << totalPaid << std::endl;
