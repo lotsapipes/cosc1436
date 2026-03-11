@@ -9,37 +9,31 @@
 #include <iomanip>
 
 #include <limits>
+
+//i think i'll just keep bloating this thing with notes
+//the wording for things like cin and cout are actually called functions, but so are the actual 'function prototypes' we just studied so we'll
+//have to go over vocabulary again; the terms procedure and subroutine are also used in this area
+//Important, one of the main reasons why we put functions at the bottom is because it condenses the code we're working on in main to smaller/easier spots
+
+
 //IMPORTANT:this preprocessor directive was needed for the thing to compile in Codespaces. Without it, it'd crash.
 // this line of code is what it fixed:
 //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-#define main() main(void)
+//#define main() main(void)
 //next we'll be trying this to see if it can transplant into codespaces properly
 
-
-
 //this is the section that will have everything we need to complete lab 2
-
 
 //we attempted various compilation things to see if we could get void main() to work for fun.
 //g++ main.cpp -o main (this is the standard compile command)
 //g++ -std=gnu++17 main.cpp -o main (this bends the rules a little bit)
 //g++ -fpermissive main.cpp -o main (this one's even more permissive)
 
-
-
-
 //another new day of notes. looks like we're continuing to cover 'do while' stuff, covering 'break's
 //i think there was a part about 'break' philosophy i missed somewhere
 //while(!quit)
 //'case' (what's case again?)
-
-
-
-
-
-
-
 
 //new day of notes, talking about how it's usually good practice to keep the variables nearby to where they're being used instead of stacking
 //them all at the top like we were doing before
@@ -65,8 +59,6 @@
 
     //logic or something goes here
 //}
-
-
 
 
 //NOTES: pushing didn't work, error messages saying to pull and then push, also failed, then error messages offering to REBASE or something else.
@@ -119,10 +111,6 @@ int main()
 
     }
 
-
-
-    
-    
     //the prefix postfix thing is REQUIRED and HEAVILY, HEAVILY USED
     int someValue = 20;
     std::cout << someValue << std::endl;
@@ -139,12 +127,8 @@ int main()
     someValue--;
     std::cout << someValue << std::endl;
 
-    
-    
-    
     //figure out how this part works later
     //while (input == (MenuCommand)0)
-    
     
     //we're going to create a menu display showing the following things: main menu, ----, a(dd movie, e)dit movie, d)elete movie, v)iew movie, and ?
 
@@ -156,7 +140,6 @@ int main()
     //movie information to the user and everything
     //we also spent time moving variables around including "promoting" some of these variables to a spot outside of 2 or more blocks so multiple
     //blocks could use them.
-
 
         std::cout << "Main Menu" << std::endl;
         std::cout << "-----------------" << std::endl;
@@ -179,7 +162,6 @@ int main()
         //missed some parts talking about something called FALLTHROUGH (which sometimes we actually want for some reason)
         //the fix is apparently to use BREAKS
         //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
-
 
         switch (choice) {
             case 'A':
