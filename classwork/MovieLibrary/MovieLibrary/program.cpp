@@ -11,10 +11,13 @@
 #include <limits>
 
 //i think i'll just keep bloating this thing with notes
-//the wording for things like cin and cout are actually called functions, but so are the actual 'function prototypes' we just studied so we'll
-//have to go over vocabulary again; the terms procedure and subroutine are also used in this area
+//the wording for things like cin and cout are actually called functions, but so are the actual 'function prototypes' we just studied are too 
+// so we'll have to go over vocabulary again; the terms procedure and subroutine are also used in this area
 //Important, one of the main reasons why we put functions at the bottom is because it condenses the code we're working on in main to smaller/easier spots
+//also cool to know, functions actually slow down code, it's just that they help to make it more maintainable/readable
 
+//so it looks like void is actually a pretty common thing in functions, we use it when the function doesn't need to return anything, but whenever
+//a function is supposed to return something, we use int instead. so we'll need both for different things
 
 //IMPORTANT:this preprocessor directive was needed for the thing to compile in Codespaces. Without it, it'd crash.
 // this line of code is what it fixed:
@@ -52,17 +55,32 @@
 //
 //covering prefixes and postfixes with increments and decrements ++x x++ --x -xx (doing x + 1 or x - 1)
 
+//something about doxygen comments below /// @brief
+/// @brief displays a horizontal line
+//something about how documenting our functions like this is PART OF OUR GRADE (all in only one line of comment)
+//something about in the industry we'll be handing off the functions to people and not the full source code
+//we can't call a function until we've declared them
+//also, don't forget it throws compile errors if you declare it and then don't define or call/implement it
+
+//LOOKS LIKE WE'RE GOING TO BE PUTTING FUNCTIONS ABOVE MAIN INSTEAD OF AT THE BOTTOM
+void DisplayLine()
+{
+    std::cout << "---------------------" << std::endl;
+}
+
+void setErrorColor() 
+{
+    std::cout << "\033[31m";
+};
+
+void resetColor() 
+{
+    std::cout << "\033[0m";   // Resets to default
+}
 
 
-//switch (input)
-//{
-
-    //logic or something goes here
-//}
 
 
-//NOTES: pushing didn't work, error messages saying to pull and then push, also failed, then error messages offering to REBASE or something else.
-//figure it out later
 
 struct Movie
     //don't forget, a Struct is a user-defined data type that can hold multiple values of different types. 
@@ -84,48 +102,17 @@ struct Movie
 
 int main()
 {
+    //THIS IS HOW WE CALL THE FUNCTION WE JUST BUILT ABOVE:
+    DisplayLine();
+    setErrorColor();
+
+
 
     //demo nested loops
     //something about how we'll be graded on whether or not we're using the correct loop for the job
     //for, while, and the do while
     //how these are pretest and posttest
 
-    for (int x = 0; x < 50; ++x)
-    {
-        for (int y = 0; y < 20; ++y)
-        {
-            std::cout << x + y << std::endl;
-
-            if (y != 0 && y % 10 == 0)
-                break;
-        }
-        if (x != 0 && x % 10 == 0)
-        {
-            std::cout << "quit?";
-            int choice;
-            std::cin >> choice;
-            if (choice != 0)
-                break;
-
-        } 
-
-    }
-
-    //the prefix postfix thing is REQUIRED and HEAVILY, HEAVILY USED
-    int someValue = 20;
-    std::cout << someValue << std::endl;
-
-    ++someValue;
-    std::cout << someValue << std::endl;
-
-    someValue++;
-    std::cout << someValue << std::endl;
-
-    --someValue;
-    std::cout << someValue << std::endl;
-
-    someValue--;
-    std::cout << someValue << std::endl;
 
     //figure out how this part works later
     //while (input == (MenuCommand)0)
@@ -163,6 +150,8 @@ int main()
         //the fix is apparently to use BREAKS
         //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
 
+
+        /*
         switch (choice) {
             case 'A':
             case 'a':
@@ -186,8 +175,8 @@ int main()
                 break;
         }
    // }
-
-   /*
+   */
+   
     if (choice == 'a' || choice == 'A') {
         std::cout << "You chose to add a movie!" << std::endl;
     }
@@ -209,7 +198,7 @@ int main()
         std::cin >> choice;
     }
 
-    */
+    
 
 
     //NOTE: below...
@@ -223,11 +212,10 @@ int main()
 
     Movie movie;
 
+    //BELOW IS FINALLY THE LINE THAT FIXED THE INPUT BUFFER
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Enter the movie title: ";
-    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::getline(std::cin, movie.title); // this is how we read in a string with spaces (yup)
-    //TODO: validate the movie title to make sure it's not empty or too long (maybe we can use a loop to keep asking until we get a valid title)
-
+    std::getline(std::cin, movie.title);
     std::cout << "Enter description: ";
     std::getline(std::cin, movie.description);
     std::cout << "Enter the movie genres: ";
