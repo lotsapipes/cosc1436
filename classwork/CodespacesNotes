@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+
+int main() {
+
+    //doesn't work yet
+std::cout << "testing compilation from scratch";
+
+//Coding conventions we've gone over and allowed to use:
+//enum
+//break
+//continue
+//case
+//if
+//while
+//switch
+//limits is allowed
+//struct
+//prefix postfixes ++x x++
+
+
+
+
+
+
+
+
+    return 0;
+}
