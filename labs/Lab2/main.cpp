@@ -16,7 +16,7 @@ double getMonthlyPayment();
 
 int main() {
     std::cout << "Lab2: Loan Payments and Interest\n";
-    std::cout << "Robert Pace\n\n";
+    std::cout << "Robert Pace\n";
     std::cout << "COSC-1436-21005; Spring 2026\n\n";
 
     double loanAmount = getLoanAmount();
