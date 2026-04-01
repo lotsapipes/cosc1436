@@ -1,4 +1,4 @@
-//
+// Robert pace
 // Movie Library
 // Cosc 1436
 // Spring 2026
@@ -7,9 +7,28 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-
 #include <limits>
 
+//barely awake, just going to continue stacking notes on here and skipping most of the coding for now
+//std::setw(width) ; i don't remember why we're allowed to type 'width' here
+//we're noting the important differences between PARAMETERS and ARGUMENTS, pay attention because it may be on the quiz
+//always DOCUMENT your PARAMETERS using the /// three slash DOXYGEN thingy (still have to look up what this is at some point)
+//simply alt + click onto some areas to create lil clones like this
+//simply alt + click onto some areas to create lil clones like this
+//simply alt + click onto some areas to create lil clones like this
+//reading about ARGUMENTS...i think we can remember these as the things inside the () when we CALL it
+//reading about PARAMETERS...i think these can be thought of as the VARIABLES inside the guts of the function when we build it (yeah these kind of make sense)
+//we're spending time creating functions that can change the color of the fonts using multiple color codes as well as a function that looks like it can work like
+//a selector for the colors; this functionality looks like it keeps expanding quite a bit and gets pretty intricate
+//also, leaning heavily into these /// @brief things that we were talking about having to understand later, these DOCUMETATION things i think is what we called them
+//finished adding the fully functional add/delete movie without the program just ending for no reason. The adding and deleting text is also color coded depending on
+//which function we're using
+//we're covering the 3 PARAMETER KINDS now, something i read about a little bit earlier already
+//Pass-By-Value is the default and the one we're most likely to be using for just about everything
+//we may need to spend some time on DEBUGGING options in codespaces, it looks like we can apply it to CALLSTACK stuff, which seems pretty important
+//DEBUGGING does kind of seem like a whole thing and we should probably look into it in a decent amount of detail
+
+//====================================================================================================================================================================
 //i think i'll just keep bloating this thing with notes
 //the wording for things like cin and cout are actually called functions, but so are the actual 'function prototypes' we just studied are too 
 // so we'll have to go over vocabulary again; the terms procedure and subroutine are also used in this area
@@ -45,12 +64,6 @@
 // ENUMERATION, subrange of int, enum id {}
 // 
 
-//we're outside of braces ftr
-//MENU_COMMAND input;
-//input = ADD;
-//std::cin >> (int)input;
-//std::cout << input;
-
 //finally got the assignment in, showing up late to take notes, here goes:
 //
 //covering prefixes and postfixes with increments and decrements ++x x++ --x -xx (doing x + 1 or x - 1)
@@ -78,10 +91,6 @@ void resetColor()
     std::cout << "\033[0m";   // Resets to default
 }
 
-
-
-
-
 struct Movie
     //don't forget, a Struct is a user-defined data type that can hold multiple values of different types. 
     // It's a way to group related data together. In this case, we have a Movie struct that has several fields: 
@@ -106,25 +115,6 @@ int main()
     DisplayLine();
     setErrorColor();
 
-
-
-    //demo nested loops
-    //something about how we'll be graded on whether or not we're using the correct loop for the job
-    //for, while, and the do while
-    //how these are pretest and posttest
-
-
-    //figure out how this part works later
-    //while (input == (MenuCommand)0)
-    
-    //we're going to create a menu display showing the following things: main menu, ----, a(dd movie, e)dit movie, d)elete movie, v)iew movie, and ?
-
-    //careful, wrapping this while around the entire menu
-    //while (input == (MenuCommand)0)
-    //{
-
-    //2nd day of talking about wrapping this thing in a while loop all the way down including the part where it displays the actual
-    //movie information to the user and everything
     //we also spent time moving variables around including "promoting" some of these variables to a spot outside of 2 or more blocks so multiple
     //blocks could use them.
 
@@ -140,42 +130,9 @@ int main()
         char choice;
         std::cin >> choice;
 
-        //NOTE: still need to study how if, else if, else stuff works
-
-        //so, for the code below, it's possible to use something else called a Switch Statement. The general
-        //way that a switch statement works is that you have a variable (in this case, choice) and then 
-        //you have different cases for each possible value of that variable.
-
         //missed some parts talking about something called FALLTHROUGH (which sometimes we actually want for some reason)
         //the fix is apparently to use BREAKS
         //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
-
-
-        /*
-        switch (choice) {
-            case 'A':
-            case 'a':
-                std::cout << "You chose to add a movie!" << std::endl;break;
-            case 'E':
-            case 'e':
-                std::cout << "You chose to edit a movie!" << std::endl;break;
-            case 'D':
-            case 'd':
-                std::cout << "You chose to delete a movie!" << std::endl;
-                break;
-            case 'V':
-            case 'v':
-                std::cout << "You chose to view a movie!" << std::endl;
-                break;
-            case '?':
-                std::cout << "Help menu coming soon!" << std::endl;
-                break;
-            default:
-                std::cout << "Invalid choice. Please enter a valid option." << std::endl;
-                break;
-        }
-   // }
-   */
    
     if (choice == 'a' || choice == 'A') {
         std::cout << "You chose to add a movie!" << std::endl;
@@ -198,19 +155,9 @@ int main()
         std::cin >> choice;
     }
 
-    
-
-
-    //NOTE: below...
-    //if (true)
-    // {
-    //if (false)
-    // }
-    //else
-
-
-
     Movie movie;
+    Movie movie[5];
+
 
     //BELOW IS FINALLY THE LINE THAT FIXED THE INPUT BUFFER
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
