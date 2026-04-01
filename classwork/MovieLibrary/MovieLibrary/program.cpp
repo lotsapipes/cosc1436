@@ -156,9 +156,10 @@ int main()
     }
 
     Movie movie;
-    Movie movie[5];
-
-
+   // Below is where the array of 100 movies will go
+   // Movie movie[100];
+   Movie movie[100];
+   
     //BELOW IS FINALLY THE LINE THAT FIXED THE INPUT BUFFER
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Enter the movie title: ";
@@ -211,9 +212,6 @@ int main()
      // it's default.
      //alternatively to short circuit evaluation, we can use BITWISE operators & and |
      //BITWISE operators are used to perform operations on individual bits of data. They are represented by the symbols &, |, ^, ~, <<, and >>.
-
-
-
 
     /*if (movie.releaseYear < 1900) {
             std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
