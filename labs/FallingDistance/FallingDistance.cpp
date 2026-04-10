@@ -5,7 +5,6 @@
 // COSC-1436-21005
 
 
-// Project name should be FallingDistance
 
 #include <iostream>
 #include <iomanip>
