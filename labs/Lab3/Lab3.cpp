@@ -5,11 +5,7 @@
 // COSC-1436-21005
 
 
-// Things we need to fix:
-
-// Go through the canvas module page and format this thing exactly as described
-// Project name must be FallingDistance
-// Solution name must be called Lab3
+// Project name should be FallingDistance
 
 #include <iostream>
 #include <iomanip>
@@ -17,6 +13,7 @@
 #include <limits>
 
 // Constants (usually accepted in CAPS form)
+// Using globals like this can be considered bad form but we're practicing anyways
 const double GRAVITY = 9.8;  // meters per second squared
 const double TERMINAL_VELOCITY = 90.0;  // meters per second
 const double METERS_TO_FEET = 3.28084;
@@ -30,7 +27,7 @@ double convertToFeet(double meters);
 void displayTable(int maxTime, char unit);
 void displayProgramInfo();
 
-// Main Function (Entry point, in our case it's user front-end, later on it can get even smaller)
+// Main Function (Entry point, in our case it's user front-end, later on it can get even smaller, sometimes literally just one line)
 int main() {
     
     displayProgramInfo();
@@ -63,17 +60,17 @@ int getFallingTime() {
     bool valid = false;
     
     do {
-        std::cout << "Please enter the number of seconds? ";
+        std::cout << "Please enter the number of seconds: ";
 
         // Below is likely code from outside of class (I keep seeing it while studying)
         // It basically just says "if 'time' did not cin properly"
         if (!(std::cin >> time)) {
-        // Below may be an input buffer clearing method from outside of class
-        // It seems to work fairly well (I also keep seeing this one)
+        // Below may be an input buffer clearing method learned from outside of class
+        // It seems to work fairly well (I also keep seeing this one while studying)
         std::cin.clear(); 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "error: Try entering a number between 1-60.\n";
-        continue; // restarts current loop (had to study why this is a bit)
+        continue; // restarts current loop (had to study how/why this is a bit)
     }   
         // Validate input is between 1 and 60
         if (time >= 1 && time <= 60) {
@@ -111,7 +108,7 @@ char getUnits() {
 
 // Story 3: Calculate falling distance for a given second
 double calculateDistance(int seconds) {
-    // Formula: d = (1/2) * g * t²
+    // Formula: d = (1/2) * g * t^2
     return 0.5 * GRAVITY * seconds * seconds;
 }
 
@@ -132,7 +129,7 @@ double convertToFeet(double meters) {
     return meters * METERS_TO_FEET;
 }
 
-// Simple Student Name and Header
+// Simple student name and header
 void displayProgramInfo() {
     std::cout << "Robert Pace" << std::endl;
     std::cout << "Lab 3: Free Fall Distance & Velocity Calculator" << std::endl;    

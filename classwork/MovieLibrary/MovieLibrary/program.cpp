@@ -155,8 +155,8 @@ bool compareArray(checking left and right arrays to see if they're equal)
 
 
 //barely awake, just going to continue stacking notes on here and skipping most of the coding for now
-//std::setw(width) ; i don't remember why we're allowed to type 'width' here
-//we're noting the important differences between PARAMETERS and ARGUMENTS, pay attention because it may be on the quiz
+    //std::setw(width) ; i don't remember why we're allowed to type 'width' here
+    //we're noting the important differences between PARAMETERS and ARGUMENTS, pay attention because it may be on the quiz
 //always DOCUMENT your PARAMETERS using the /// three slash DOXYGEN thingy (still have to look up what this is at some point)
 //simply alt + click onto some areas to create lil clones like this
 //simply alt + click onto some areas to create lil clones like this
@@ -228,9 +228,115 @@ bool compareArray(checking left and right arrays to see if they're equal)
     // title, genres, runLength, releaseYear, userRating, isClassic, and description. 
     // Each field has a specific type (string, int, double, bool) that defines what kind of data it can hold.
 
+{
+    std::string title;
+    std::string genres;
+
+    int runLength = 0;
+    int releaseYear = 0;
+    double userRating = 0;
+    char isClassic = false;
+    std::string description;
+
+};
+
+int main()
+{
+    //THIS IS HOW WE CALL THE FUNCTION WE JUST BUILT ABOVE:
+    DisplayLine();
+    setErrorColor();
+
+    //we also spent time moving variables around including "promoting" some of these variables to a spot outside of 2 or more blocks so multiple
+    //blocks could use them.
+
+        std::cout << "Main Menu" << std::endl;
+        std::cout << "-----------------" << std::endl;
+        std::cout << "a) Add Movie" << std::endl;
+        std::cout << "e) Edit Movie" << std::endl;
+        std::cout << "d) Delete Movie" << std::endl;
+        std::cout << "v) View Movie" << std::endl;
+        std::cout << "?) Help" << std::endl;
+        std::cout << "Pick one of the letters from the menu to continue: ";
+
+        char choice;
+        std::cin >> choice;
+
         //missed some parts talking about something called FALLTHROUGH (which sometimes we actually want for some reason)
         //the fix is apparently to use BREAKS
         //you can stake multiple 'lines' into one as shown below with the breaks (i skipped some)
+   
+    if (choice == 'a' || choice == 'A') {
+        std::cout << "You chose to add a movie!" << std::endl;
+    }
+    else if (choice == 'e' || choice == 'E') {
+        std::cout << "You chose to edit a movie!" << std::endl;
+    }
+    else if (choice == 'd' || choice == 'D') {
+        std::cout << "You chose to delete a movie!" << std::endl;
+    }
+    else if (choice == 'v' || choice == 'V') {
+        std::cout << "You chose to view a movie!" << std::endl;
+    }
+    else if (choice == '?') {
+        std::cout << "Help menu coming soon!" << std::endl;
+    }
+    while (choice != 'a' && choice != 'A' && choice != 'e' && choice != 'E' && choice != 'd' && choice != 'D' && choice != 'v' && choice != 'V' && choice != '?') {
+        std::cout << "Invalid choice. Please enter a valid option." << std::endl;
+        std::cin.clear(); // this clears the error state of the input stream, hopefully, check later
+        std::cin >> choice;
+    }
+
+    Movie movie;
+   // Below is where the array of 100 movies will go
+   // Movie movie[100];
+   Movie movie[100];
+   
+    //BELOW IS FINALLY THE LINE THAT FIXED THE INPUT BUFFER
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Enter the movie title: ";
+    std::getline(std::cin, movie.title);
+    std::cout << "Enter description: ";
+    std::getline(std::cin, movie.description);
+    std::cout << "Enter the movie genres: ";
+    std::getline(std::cin, movie.genres);
+    std::cout << "Enter the movie run length (in minutes): ";
+    std::cin >> movie.runLength;
+    //TODO: validate the run length to make sure it's a positive integer (maybe we can use a loop to keep asking until we get a valid run length)
+
+    //NOTE: bracket placement on these ones below? ah, found it, it's called a BLOCK STATEMENT, notes below:
+
+    if (movie.runLength < 0) {
+        std::cout << "Invalid run length. Please enter a positive integer: ";
+        std::cin >> movie.runLength;
+    }
+
+    //block statement is a group of statements that are enclosed in curly braces {}. 
+    // They are used to define the scope of variables and to group related statements together. 
+    // In this case, we have an if statement that checks if the run length is less than 0. 
+    // If it is, we print an error message and ask the user to enter a valid run length. 
+    // The block of code inside the if statement will only be executed if the condition is true.
+
+    //clearing the input buffer below like this:
+    std::cin.clear();
+
+    std::cout << "Enter the movie release year (1900 - 2100): ";
+    std::cin >> movie.releaseYear;
+
+    //TODO: validate the release year to make sure it's between 1900 and 2100 (maybe we can use a loop to keep asking until we get a valid release year)
+
+    // these || are called logical OR operators, they are used to combine two conditions and return true if either condition is true.
+    // technically though, at this point in the class, we'll be using two separate if statements:
+
+    //fixed the stuff below by changing from an "IF" to a "WHILE"
+    if (movie.releaseYear < 1900 || movie.releaseYear > 2100) {
+        std::cout << "Invalid release year. Please enter a year between 1900 and 2100: ";
+        movie.releaseYear = 0;
+        std::cin >> movie.releaseYear;
+         // this clears the error state of the input stream
+        //interestingly, if you put in a char instead of a number, it infinitely loops, this is because when you enter a char, 
+        // it fails to read it as an integer and leaves the input stream in a failed state.
+        // To fix this, we can clear the input stream and ignore the invalid input before asking for the release year again.
+    }
 
 //spent some time going over && and || operators
      //short circuit evaluation is a concept in programming where the evaluation of a logical expression is instant on the first condition A || B
