@@ -25,8 +25,9 @@ int multiplication[maxRows][maxCols] {
     {6 ,12 ,18 ,24 ,30 ,36 ,42 ,48 ,54 ,60 ,66 ,72 },
     {7 ,14 ,21 ,28 ,35 ,42 ,49 ,56 ,63 ,70 ,77 ,84 },
     {8 ,16 ,24 ,32 ,40 ,48 ,56 ,64 ,72 ,80 ,88 ,96 },
-    {9 ,18 ,27 ,36 ,45 ,54 ,63 ,72 ,81 ,90 ,-99 ,-99 },}
+    {9 ,18 ,27 ,36 ,45 ,54 ,63 ,72 ,81 ,90 ,-99 ,-99 }
 };
+}
 // to overload the CPU with the above array, we'd need a table the size of 1000x1000, which would be 1 million integers, which is a lot for a CPU to handle, 
 // so we won't be doing that, but it's good to know how to initialize a 2D array like this for future reference
 // this is more difficult on modern processors because of the way they handle memory, but it's still good to know how to do this for future reference
@@ -69,6 +70,38 @@ void viewMovie(const Movie& movie);
 
 int main()
 {
+
+        //we're about to start demonstrating pointers at this point, here goes:
+        int someValue = 42;
+        // I have no idea why the version i'm working on required me to add the * to the value below, but we had to while the example in class didn't. compiler maybe?
+        int* ptrValue; //they may have just added it, something about trying to read this part "backwards" for it to make sense
+        // hah okay something about how int* isn't an int itself, it's like a '*pointer' to an int or something like that
+        ptrValue = &someValue; // this is how we assign the address of someValue to ptrValue, the & operator is used to get the address of a variable
+        //here, the & symbol can be thought of as @, maybe?
+        //a dereferenced value is the value that a pointer points to
+        std::cout << "Pointer value: " << ptrValue << std::endl; // this will print the address of someValue
+        std::cout << "Some Value Adress: " << &someValue << std::endl; // this will also print the address of someValue
+        std::cout << "Dereferenced Pointer Value: " << ptrValue << std::endl; // this will print the value of someValue, which is 42,
+        // the * operator is used to dereference a pointer and get the value it points to
+
+        // pointers have their own naming convetions, the most popular ones being ptrValue and pvalue.
+        // let's just stick with ptr going forward, i think 
+        // also, don't forget to always initialize them.
+        // nullptr is a special value that can be assigned to a pointer to indicate that it doesn't point to anything, it's like a null value for pointers
+        // *ptrValue = NULL is the old way of doing this, but it's not recommended because NULL is typically defined as 0, which can lead to confusion and errors.
+
+
+        // i'm seeing the example looking like it's saying it's got couts of like:
+        // ptrValue
+        // *ptrValue
+        // &someValue
+        // someValue
+
+        //dereferencing a point gives us acces to the value stored at that point
+        // dereference_op ::= E
+        // *ptrvalue
+
+
         std::cout << "Main Menu" << std::endl;
         std::cout << "-----------------" << std::endl;
         std::cout << "a) Add Movie" << std::endl;
@@ -179,15 +212,7 @@ we can't display arrays, we'll have to build one on our own it sounds like
 
 bool compareArray(checking left and right arrays to see if they're equal)
 
-
-
 */
-
-
-
-
-
-
 
 //barely awake, just going to continue stacking notes on here and skipping most of the coding for now
     //std::setw(width) ; i don't remember why we're allowed to type 'width' here
@@ -262,7 +287,8 @@ bool compareArray(checking left and right arrays to see if they're equal)
     // It's a way to group related data together. In this case, we have a Movie struct that has several fields: 
     // title, genres, runLength, releaseYear, userRating, isClassic, and description. 
     // Each field has a specific type (string, int, double, bool) that defines what kind of data it can hold.
-
+/*
+struct Movie
 {
     std::string title;
     std::string genres;
@@ -274,6 +300,23 @@ bool compareArray(checking left and right arrays to see if they're equal)
     std::string description;
 
 };
+*/
+
+
+
+
+
+
+/*
+Old main below i guess. i didn't even know i built two of these.
+
+
+
+
+
+
+
+
 
 int main()
 {
@@ -372,6 +415,23 @@ int main()
         // it fails to read it as an integer and leaves the input stream in a failed state.
         // To fix this, we can clear the input stream and ignore the invalid input before asking for the release year again.
     }
+    
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
 
 //spent some time going over && and || operators
      //short circuit evaluation is a concept in programming where the evaluation of a logical expression is instant on the first condition A || B
