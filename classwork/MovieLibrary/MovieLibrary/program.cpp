@@ -12,6 +12,29 @@
 const int maxRows = 10;
 const int maxCols = 12;
 
+// continuing to add notes on the top to make sure i somewhat keep up. it looks like when going over POINTERS, there's some stuff about
+// short circuit evaluation and how it can work while we're building this ARRAY
+// PASS BY REFERENCE has been talked about many many times and i should probably review it as well as the 
+// other two parameter passing methods (PASS BY VALUE and PASS BY POINTER) to make sure i understand the differences
+// between them and when to use each one
+// talking about changing from REFERENCE to POINTERS, some example code could/maybe/dk look like:
+//void ViewMovies(Movie* movies[], int size)
+//{
+//    for (int index = 0; index < size; index++)
+//    {
+//        if (movies[index] != nullptr) // this is a null pointer check, we want to make sure we're not trying to dereference a null pointer, which would cause a crash
+//            ViewMovie(*movies[index]);
+//   }
+// looks like the *, &, and nullptr are being used quite a bit while building these POINTERS
+// there is also syntax we're going to use like 'new' and 'delete', but not sure i've seen that yet
+// new and delete are used to allocate and deallocate memory on the HEAP, which is where DYNAMIC MEMORY is stored.
+
+//there are ways to convert from pass by reference to a pointer, it goes like this
+//1. change the parameter to a pointer type (e.g. Movie* movies[] instead of Movie movies[])
+//2.change every reference to the parameter inside the function to a pointer dereference (e.g. movies[index] instead of movies[index])
+//3. validate that the pointer is not null before dereferencing it (e.g. if (movies[index] != nullptr) before calling ViewMovie(*movies[index]))
+//4. (on the CALLER SIDE) change the argument to a pointer (e.g. &movies instead of movies) when calling the function
+// i also have to review how the whole CALLING and CALL STACK process works
 
 void multiDimensionalArrayExample() {
 // the block below is demonstrating how to initialize a 2D array, this is just for practice and will not be used in the actual movie library program, 
@@ -66,10 +89,37 @@ struct Movie{
 int FindMovieById(Movie movies[], int size, int id);
 void deleteMovie(Movie& movie);
 void deleteMovies(Movie movies[], int size);
-void viewMovie(const Movie& movie);
+void ViewMovie(const Movie& movie);
+
+void ViewMovies(Movie* movies[], int size)
+{
+    for (int index = 0; index < size; index++) 
+    {
+        if (movies[index] != nullptr) // this is a null pointer check, we want to make sure we're not trying to dereference a null pointer, which would cause a crash
+            ViewMovie(*movies[index]); //nullptr is a special value that can be assigned to a pointer to indicate that it doesn't point to anything, it's like a null value for pointers
+        
+    }
+}
+
+
+
+void DynamicMemoryDemo();
+
 
 int main()
 {
+
+DynamicMemoryDemo(); // i don't think i built this thing
+
+const int MaximumMovies = 100;
+Movie* movies[MaximumMovies] = { nullptr }; // this is an array of pointers to Movie objects, we initialize all the pointers to nullptr to indicate that they don't point to anything yet
+
+
+
+
+
+
+
 
         //we're about to start demonstrating pointers at this point, here goes:
         int someValue = 42;
@@ -186,8 +236,11 @@ int main()
     }
     return 0;
 
+    
+int AddMovie (Movie movies[], int size, const Movie& newMovie)
+{
 
-
+}
 
 
 
