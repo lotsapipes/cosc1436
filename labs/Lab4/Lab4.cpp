@@ -61,6 +61,9 @@ V
 
 */
 
+//stuff to fix:
+//go over comment syntax conventions again
+
 //Heading is already above, go ahead and start putting the preprocessors and just start
 //scribbling what we've got so far
 
@@ -263,4 +266,114 @@ void displayValues(const int arr[], int count) {
 // the table is for sure gonna need some work
 
 
+}
+
+
+//3rd pass begins here.
+
+
+
+
+
+// Function: insertValues
+// Purpose: Adds new positive values to existing array
+// Parameters: arr - array to store new values
+//             currentCount - current number of valid elements
+//             maxSize - maximum capacity of array
+// Returns: new count after insertion
+int insertValues(int arr[], int currentCount, int maxSize) {
+    
+    int input;
+    int newCount = currentCount;
+    
+    std::cout << "Enter new values (0 to stop):\n";
+    
+    while (newCount < maxSize) {
+        std::cout << "Enter a value: ";
+        std::cin >> input;
+        
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter an integer.\n";
+            continue;
+        }
+        
+        if (input == 0) {
+            break;
+        } else if (input < 0) {
+            std::cout << "You must enter a value greater than or equal to 0\n";
+        } else {
+            arr[newCount] = input;
+            newCount++;
+        }
+    }
+    
+    return newCount;
+}
+
+// Main function
+int main() {
+    //so i guess just throw the global here instead since this is the only place i ended up needing it
+    int numbers[MAX_SIZE];
+    int count = 0;
+    char choice;
+    
+    //i may mess with formatting in this later...
+    std::cout << "Welcome to Number Analysis Program\n";
+    std::cout << "==================================\n\n";
+    
+    // Story 2: Get initial numbers
+    count = getNumbers(numbers, MAX_SIZE);
+    
+    // Story 3: Main menu loop
+    do {
+        displayMenu(choice);
+        
+        switch (choice) {
+            case 'A':  // Add (Story 4, but actually "Add" in menu)
+                // This is the same as insert functionality
+                count = insertValues(numbers, count, MAX_SIZE);
+                break;
+                
+            case 'L':  // Largest (Story 4)
+                if (count > 0) {
+                    std::cout << "Largest = " << findLargest(numbers, count) << std::endl;
+                } else {
+                    std::cout << "No values to analyze.\n";
+                }
+                break;
+                
+            case 'S':  // Smallest (Story 5)
+                if (count > 0) {
+                    std::cout << "Smallest = " << findSmallest(numbers, count) << std::endl;
+                } else {
+                    std::cout << "No values to analyze.\n";
+                }
+                break;
+                
+            case 'M':  // Mean (Story 7)
+                if (count > 0) {
+                    std::cout << std::fixed << std::setprecision(4);
+                    std::cout << "Mean = " << calculateMean(numbers, count) << std::endl;
+                } else {
+                    std::cout << "No values to calculate mean.\n";
+                }
+                break;
+                
+            case 'V':  // View (Story 8)
+                displayValues(numbers, count);
+                break;
+                
+            case 'I':  // Insert (Story 9)
+                count = insertValues(numbers, count, MAX_SIZE);
+                break;
+                
+            case 'Q':  // Quit
+                std::cout << "Ending Program.\n";
+                break;
+        }
+    } while (choice != 'Q');
+    
+    return 0;
 }
