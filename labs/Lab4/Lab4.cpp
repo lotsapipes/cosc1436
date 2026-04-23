@@ -94,11 +94,12 @@ int getNumbers(int arr[], int maxSize) {
     int input;
     
     while (count < maxSize) {
-        std::cout << "Enter a value: ";
+        std::cout << "Enter a value (there's room for 100 values max): ";
         std::cin >> input;
         
         // Validate input
         // going to try a newer version of the cin checking this time, we'll know if it works later
+        // something about how i was doing it wrong before? can't remember
         if (std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -158,3 +159,108 @@ void displayMenu(char &choice) {
 
 // that should work as a main menu...
 // i still need to test these later
+
+
+
+
+
+
+//2nd round, most of these functions are actually mostly the same in syntax
+//the table is the part that has me worried, double check to make sure it works right and prints the way we want it to
+// i'll probably just rewrite all of the Function comments now that i'm looking at them
+
+// Function: findLargest
+// Purpose: Finds largest value in array
+// Parameters: arr - array of integers
+// count - number of valid elements in array
+// Returns: largest integer value
+
+int findLargest(const int arr[], int count) {
+    if (count <= 0) return 0;
+    
+    int largest = arr[0];
+    for (int i = 1; i < count; i++) {
+        if (arr[i] > largest) {
+            largest = arr[i];
+        }
+    }
+    return largest;
+}
+
+// Function: findSmallest
+// Purpose: Finds smallest value in array
+// Parameters: arr - array of integers
+// count - number of valid elements in array
+// Returns: smallest integer value
+
+int findSmallest(const int arr[], int count) {
+    if (count <= 0) return 0;
+    
+    int smallest = arr[0];
+    for (int i = 1; i < count; i++) {
+        if (arr[i] < smallest) {
+            smallest = arr[i];
+        }
+    }
+    return smallest;
+}
+
+// Function: sumValues
+// Purpose: Calculates sum of all values in array
+// Parameters: arr - array of integers
+//             count - number of valid elements in array
+// Returns: sum of all values
+
+int sumValues(const int arr[], int count) {
+    int sum = 0;
+    for (int i = 0; i < count; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+// Function: calculateMean
+// Purpose: Calculates average of values in array
+// Parameters: arr - array of integers
+//             count - number of valid elements in array
+// Returns: mean as double (0.0 if no elements)
+
+double calculateMean(const int arr[], int count) {
+    if (count <= 0) return 0.0;
+    
+    int sum = sumValues(arr, count);
+    //not sure if i'll need to format these to two places using that one tool we were using before
+    //also not even sure if it wasn't 4 decimal places
+    return static_cast<double>(sum) / count;
+}
+
+// Function: displayValues
+// Purpose: Displays all values in array, 10 per line
+// Parameters: arr - array of integers
+//             count - number of valid elements in array
+// Returns: nothing, always for tables
+
+void displayValues(const int arr[], int count) {
+    if (count == 0) {
+        std::cout << "No values to display.\n";
+        return;
+    }
+    
+    for (int i = 0; i < count; i++) {
+        std::cout << arr[i];
+        if ((i + 1) % 10 == 0) {
+            std::cout << std::endl;
+        } else if (i != count - 1) {
+            std::cout << "    "; //placeholder, fix this part later
+        }
+    }
+    //still kind of lost on this part here, double check it
+    if (count % 10 != 0) {
+        std::cout << std::endl;
+    }
+
+
+// the table is for sure gonna need some work
+
+
+}
