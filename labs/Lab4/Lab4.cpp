@@ -60,3 +60,101 @@ V
 50    45    75    30
 
 */
+
+//Heading is already above, go ahead and start putting the preprocessors and just start
+//scribbling what we've got so far
+
+#include <iostream>
+#include <iomanip>
+#include <limits>
+
+// Constants
+const int MAX_SIZE = 100; //reread the prompt, i think i'll have to move this somewhere
+
+// Function prototypes
+//it's a lot of arrays...but i think this'll work. if not, i'll just rework it
+// don't forget to recheck the syntax on the slots
+int getNumbers(int arr[], int maxSize);
+void displayMenu(char &choice);
+int findLargest(const int arr[], int count);
+int findSmallest(const int arr[], int count);
+int sumValues(const int arr[], int count);
+double calculateMean(const int arr[], int count);
+void displayValues(const int arr[], int count);
+int insertValues(int arr[], int currentCount, int maxSize);
+
+// Function: getNumbers
+// Purpose: Prompts user to enter integers, stores positive values in array until 0 or max
+// Parameters: arr - array to store values
+//             maxSize - maximum capacity of array
+// Returns: number of valid values entered (excluding 0 and negatives)
+
+int getNumbers(int arr[], int maxSize) {
+    int count = 0;
+    int input;
+    
+    while (count < maxSize) {
+        std::cout << "Enter a value: ";
+        std::cin >> input;
+        
+        // Validate input
+        // going to try a newer version of the cin checking this time, we'll know if it works later
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter an integer.\n";
+            continue;
+        }
+        
+        if (input == 0) {
+            break;
+        } else if (input < 0) {
+            std::cout << "You must enter a value greater than or equal to 0\n";
+            //still have to cross reference the below with the classwork to make sure it matches
+        } else {
+            arr[count] = input;
+            count++;
+        }
+    }
+    
+    return count;
+}
+
+//that should work 
+// test later
+
+// Function: displayMenu
+// Purpose: Shows main menu and gets user's choice with validation
+// Parameters: choice - reference to char to store user's selection
+// Returns: nothing (modifies choice directly)
+
+void displayMenu(char &choice) {
+    std::cout << "\nMain Menu\n";
+    std::cout << "---------------\n";
+    std::cout << "Press A for: Add\n";
+    std::cout << "Press L for: Largest\n";
+    std::cout << "Press M for: Mean\n";
+    std::cout << "Press S for: Smallest\n";
+    std::cout << "Press I for: Insert\n";
+    std::cout << "Press V for: View\n";
+    std::cout << "Press Q for: Quit\n";
+    std::cout << "Choice: ";
+    std::cin >> choice;
+    //it'd be cool if i formatted this nice and neat the first time
+    
+    // Convert to uppercase for case-insensitivity
+    // make sure the below works as well as review what that one thing we tried to use last time, that weird converter
+    // if we can't find a cleaner way to do it, just throw in the lower case letters in again
+    choice = toupper(choice);
+    
+    // Validate input
+    while (choice != 'A' && choice != 'L' && choice != 'M' && 
+           choice != 'S' && choice != 'I' && choice != 'V' && choice != 'Q') {
+        std::cout << "Invalid choice. Please enter A, L, M, S, I, V, or Q: ";
+        std::cin >> choice;
+        choice = toupper(choice);
+    }
+}
+
+// that should work as a main menu...
+// i still need to test these later
