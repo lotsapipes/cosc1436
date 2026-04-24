@@ -1,82 +1,18 @@
 
-//this is a placeholder to ensure that the configuration files (i forget what they're called right now)
-//are created properly using Visual Studio
-//now we can edit this thing using any tool we want.
-
 // Robert Pace
-// Lab 3: Free Fall Distance & Velocity Calculator
+// Lab 4: Simple Numbers Analyzer
 // Spring 2026
 // COSC-1436-21005
-
-// we're going to be building an array that goes up to 100, arrays only
-// something about pressing 0 to exit a loop (also no negatives are allowed)
-// no global variables allowed on this one (we were allowed to use them last lab)
-// there'll eventually be an option to quit the program this time (maybe it's 0?)
-// something about calculating the array with a function and the user not being able to enter the Debugger and change values that way??
-// doing some simple rounding of doubles to 4 decimal places
-// what's delimiting?
-
-//CONTINUING TO ADD HOW TO NOTES
-//"Have the main program call the new function in a loop until the user elects to quit the program." (make sure we understand this)
-// doesn't belong in this assignment but don't forget to review "Function Overloading"
-// lots of common sense stuff about calculting all these things AFTER the user has entered all their values, not while they're entering them (so we don't have to worry about the user entering a value that causes an error in the middle of the calculations)
-// on the part where we display the whole array, it says: "Because the array may have many values show 10 values per line."
-// apparently we need a counter variable?: "You will need to ensure that you update the counter variable you are using to track how many elements in the array are being used."
-
-
-//SAMPLE OUTPUT FROM ASSIGNMENT BELOW:
-/*
-
-Enter a value: 50
-Enter a value: 45
-Enter a value: 75
-Enter a value: -1
-You must enter a value greater than or equal to 0
-Enter a value: 30
-Enter a value: 0
-
-Main Menu
----------------
-A) dd 
-L) argest
-M) ean
-S) mallest
-I) nsert
-V) iew
-Q) uit
-L
-Largest = 75
-
-Main Menu
-----------------
-...
-M
-Mean = 50.0000
-
-Main Menu
----------------
-...
-V
-50    45    75    30
-
-*/
-
-//stuff to fix:
-//go over comment syntax conventions again
-
-//Heading is already above, go ahead and start putting the preprocessors and just start
-//scribbling what we've got so far
 
 #include <iostream>
 #include <iomanip>
 #include <limits>
 
 // Constants
-const int MAX_SIZE = 100; //reread the prompt, i think i'll have to move this somewhere
+// Globals can be dangerous but in smaller programs like this it's a nice and maintainable way to alter the array size
+const int MAX_SIZE = 100;
 
 // Function prototypes
-//it's a lot of arrays...but i think this'll work. if not, i'll just rework it
-// don't forget to recheck the syntax on the slots
 int getNumbers(int arr[], int maxSize);
 void displayMenu(char &choice);
 int findLargest(const int arr[], int count);
@@ -101,8 +37,7 @@ int getNumbers(int arr[], int maxSize) {
         std::cin >> input;
         
         // Validate input
-        // going to try a newer version of the cin checking this time, we'll know if it works later
-        // something about how i was doing it wrong before? can't remember
+        // Trying a different way of input buffer clearing again
         if (std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -114,7 +49,6 @@ int getNumbers(int arr[], int maxSize) {
             break;
         } else if (input < 0) {
             std::cout << "You must enter a value greater than or equal to 0\n";
-            //still have to cross reference the below with the classwork to make sure it matches
         } else {
             arr[count] = input;
             count++;
@@ -124,9 +58,6 @@ int getNumbers(int arr[], int maxSize) {
     return count;
 }
 
-//that should work 
-// test later
-
 // Function: displayMenu
 // Purpose: Shows main menu and gets user's choice with validation
 // Parameters: choice - reference to char to store user's selection
@@ -135,20 +66,17 @@ int getNumbers(int arr[], int maxSize) {
 void displayMenu(char &choice) {
     std::cout << "\nMain Menu\n";
     std::cout << "---------------\n";
-    std::cout << "Press A for: Add\n";
-    std::cout << "Press L for: Largest\n";
-    std::cout << "Press M for: Mean\n";
-    std::cout << "Press S for: Smallest\n";
-    std::cout << "Press I for: Insert\n";
-    std::cout << "Press V for: View\n";
+    std::cout << "Press A for: Add all Values\n";
+    std::cout << "Press L for: Largest Value\n";
+    std::cout << "Press M for: Mean of Values\n";
+    std::cout << "Press S for: Smallest Value\n";
+    std::cout << "Press I for: Insert More Values\n";
+    std::cout << "Press V for: View Table\n";
     std::cout << "Press Q for: Quit\n";
     std::cout << "Choice: ";
     std::cin >> choice;
-    //it'd be cool if i formatted this nice and neat the first time
-    
-    // Convert to uppercase for case-insensitivity
-    // make sure the below works as well as review what that one thing we tried to use last time, that weird converter
-    // if we can't find a cleaner way to do it, just throw in the lower case letters in again
+
+    //trying a different way to validate Case 
     choice = toupper(choice);
     
     // Validate input
@@ -160,22 +88,10 @@ void displayMenu(char &choice) {
     }
 }
 
-// that should work as a main menu...
-// i still need to test these later
-
-
-
-
-
-
-//2nd round, most of these functions are actually mostly the same in syntax
-//the table is the part that has me worried, double check to make sure it works right and prints the way we want it to
-// i'll probably just rewrite all of the Function comments now that i'm looking at them
-
 // Function: findLargest
 // Purpose: Finds largest value in array
 // Parameters: arr - array of integers
-// count - number of valid elements in array
+//          count - number of valid elements in array
 // Returns: largest integer value
 
 int findLargest(const int arr[], int count) {
@@ -193,7 +109,7 @@ int findLargest(const int arr[], int count) {
 // Function: findSmallest
 // Purpose: Finds smallest value in array
 // Parameters: arr - array of integers
-// count - number of valid elements in array
+//          count - number of valid elements in array
 // Returns: smallest integer value
 
 int findSmallest(const int arr[], int count) {
@@ -225,15 +141,13 @@ int sumValues(const int arr[], int count) {
 // Function: calculateMean
 // Purpose: Calculates average of values in array
 // Parameters: arr - array of integers
-//             count - number of valid elements in array
+//          count - number of valid elements in array
 // Returns: mean as double (0.0 if no elements)
 
 double calculateMean(const int arr[], int count) {
     if (count <= 0) return 0.0;
     
     int sum = sumValues(arr, count);
-    //not sure if i'll need to format these to two places using that one tool we were using before
-    //also not even sure if it wasn't 4 decimal places
     return static_cast<double>(sum) / count;
 }
 
@@ -254,26 +168,14 @@ void displayValues(const int arr[], int count) {
         if ((i + 1) % 10 == 0) {
             std::cout << std::endl;
         } else if (i != count - 1) {
-            std::cout << "    "; //placeholder, fix this part later
+            std::cout << "    "; // Just some basic spacing between the numbers
         }
     }
-    //still kind of lost on this part here, double check it
+    // This is the part that draws a new line every 10 values for the table
     if (count % 10 != 0) {
         std::cout << std::endl;
     }
-
-
-// the table is for sure gonna need some work
-
-
 }
-
-
-//3rd pass begins here.
-
-
-
-
 
 // Function: insertValues
 // Purpose: Adds new positive values to existing array
@@ -314,12 +216,10 @@ int insertValues(int arr[], int currentCount, int maxSize) {
 
 // Main function
 int main() {
-    //so i guess just throw the global here instead since this is the only place i ended up needing it
     int numbers[MAX_SIZE];
     int count = 0;
     char choice;
     
-    //i may mess with formatting in this later...
     std::cout << "Welcome to Number Analysis Program\n";
     std::cout << "==================================\n\n";
     
@@ -327,13 +227,19 @@ int main() {
     count = getNumbers(numbers, MAX_SIZE);
     
     // Story 3: Main menu loop
+    // In this program the MainFunction is also the User GUI but it does a lot more logic this time
+
     do {
         displayMenu(choice);
         
         switch (choice) {
-            case 'A':  // Add (Story 4, but actually "Add" in menu)
-                // This is the same as insert functionality
-                count = insertValues(numbers, count, MAX_SIZE);
+            case 'A':  // Add All Values (Story 4, "Add all Values" in menu)
+                
+                if (count > 0) {
+                    std::cout << "Sum = " << sumValues(numbers, count) << std::endl;
+                } else {
+                    std::cout << "No values to calculate sum.\n";
+                }
                 break;
                 
             case 'L':  // Largest (Story 4)
@@ -361,16 +267,16 @@ int main() {
                 }
                 break;
                 
-            case 'V':  // View (Story 8)
+            case 'V':  // View Table (Story 8)
                 displayValues(numbers, count);
                 break;
                 
-            case 'I':  // Insert (Story 9)
+            case 'I':  // Insert More Values (Story 9)
                 count = insertValues(numbers, count, MAX_SIZE);
                 break;
                 
             case 'Q':  // Quit
-                std::cout << "Ending Program.\n";
+                std::cout << "Bye! =)\n";
                 break;
         }
     } while (choice != 'Q');
