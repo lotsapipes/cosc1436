@@ -27,9 +27,50 @@ Doing stuff on step 6 about deleting pointers to clear memory and stuff
 */
 
 
+// Robert Pace
+// Lab 5: XY Traveler
+// Spring 2026
+// COSC-1436-21005
 
 
 
-//this is a placeholder to ensure that the configuration files (i forget what they're called right now)
-//are created properly using Visual Studio
-//now we can edit this thing using any tool we want.
+
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <cstring> //supposed to be a bit trickier, double check on this one
+#include <cctype> //easy converter
+
+//meh...it keeps coming up. i may just throw it in
+using namespace std;
+
+// Constants
+const int MAX_STOPS = 100;
+const int MIN_X = -100;
+const int MAX_X = 100;
+const int MIN_Y = -100;
+const int MAX_Y = 100;
+const int MIN_SPEED = 1;
+const int MAX_SPEED = 60;
+
+// Struct definitions
+struct Stop {
+    int x;
+    int y;
+};
+
+// Function prototypes for Story 2 (Main Menu)
+void displayMainMenu();
+int getMenuChoice();
+bool handleMenuChoice(int choice, Stop* trip[], int& stopCount, int speed);
+bool confirmQuit();
+void waitForEnter();
+
+// Story 3 & 4 (Trip array and adding stops)
+Stop* createStop(int x, int y);
+bool addStopToTrip(Stop* trip[], Stop* newStop);
+bool isValidPosition(int x, int y);
+
+
+//going to stop here and read more about pointers before i start writing a bunch of these
