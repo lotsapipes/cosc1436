@@ -43,6 +43,7 @@ Doing stuff on step 6 about deleting pointers to clear memory and stuff
 #include <cctype> //easy converter
 
 //meh...it keeps coming up. i may just throw it in
+//horrible, horrible idea, retype everything.
 using namespace std;
 
 // Constants
@@ -73,4 +74,165 @@ bool addStopToTrip(Stop* trip[], Stop* newStop);
 bool isValidPosition(int x, int y);
 
 
-//going to stop here and read more about pointers before i start writing a bunch of these
+// going to stop here and read more about pointers before i start writing a bunch of these
+
+
+// round 2 as they say on the streets
+// since we've got the basic outline for the global variables we're for sure going to use
+// and probably most of the function prototypes, we stuck to working on the backend functions
+// don't forget to check how to check history on GitHub (if we even can) to study the process we used for later
+// if not, it probably doesn't matter anyways since most of this will be from memory like everything else
+
+
+//everything below this line is functions with pointers. they're not too difficult but...
+//after rereading this i'm still a little fuzzy on how it works. study it again later, maybe,
+//but...we really need to focus on calculus this late in the semester.
+//NOTE: doesn't compile because of a dropped {} somewhere. (i threw one at the very end as a guess, see below)
+//-----------------------------------------------------------------------------------------------------
+
+int main(){
+
+
+}
+
+
+// Story 3 & 4: Create a new stop
+Stop* createStop(int x, int y) {
+    Stop* newStop = new Stop;
+    newStop->x = x; //new operators here, double check on these
+    newStop->y = y; //new operators here, double check on these
+    return newStop;
+}
+
+// Story 3 & 4: Validate position
+bool isValidPosition(int x, int y) {
+    return (x >= MIN_X && x <= MAX_X && y >= MIN_Y && y <= MAX_Y);
+}
+
+// Story 4: Add stop to trip
+bool addStopToTrip(Stop* trip[], Stop* newStop) {
+    // Find first null position in array
+    for (int i = 0; i < MAX_STOPS; i++) {
+        if (trip[i] == nullptr) {
+            trip[i] = newStop;
+            return true;
+        }
+    }
+    return false;  // Trip is full
+}
+
+// Story 4: Handle add stop menu option
+void handleAddStop(Stop* trip[]) {
+    int x, y;
+    string input;
+    
+    cout << "\n--- Add New Stop ---" << endl;
+    
+    // Get X coordinate
+    cout << "Enter X coordinate (-100 to 100): ";
+    cin >> input;
+    x = stoi(input);
+    
+    // Get Y coordinate
+    cout << "Enter Y coordinate (-100 to 100): ";
+    cin >> input;
+    y = stoi(input);
+    
+    // Validate coordinates
+    if (!isValidPosition(x, y)) {
+        cout << "Error: Coordinates must be between -100 and 100." << endl;
+        return;
+    }
+    
+    // Create new stop
+    Stop* newStop = createStop(x, y);
+    
+    // Add to trip
+    if (addStopToTrip(trip, newStop)) {
+        cout << "Stop (" << x << ", " << y << ") added successfully!" << endl;
+    } else {
+        cout << "Error: Trip is full (maximum " << MAX_STOPS << " stops). Cannot add more stops." << endl;
+        delete newStop;  // Clean up allocated memory
+    }
+}
+
+// Story 8: Get speed from user
+int getSpeed() {
+    int speed;
+    string input;
+    
+    do {
+        cout << "Enter the speed (1-60 miles per hour): ";
+        cin >> input;
+        speed = stoi(input); //finally the stuff from class starts to match up and we can use it
+        
+        if (speed < MIN_SPEED || speed > MAX_SPEED) {
+            cout << "Error: Speed must be between " << MIN_SPEED << " and " << MAX_SPEED << " mph." << endl;
+        }
+    } while (speed < MIN_SPEED || speed > MAX_SPEED);
+    
+    return speed;
+}
+
+// Story 8: Calculate distance between two points
+double calculateDistance(const Stop& point1, const Stop& point2) {
+    int dx = point2.x - point1.x; //not sure if i really like these variable names since dx/dy are real terms...but i can't think of anything else
+    int dy = point2.y - point1.y;
+    return sqrt(dx*dx + dy*dy);
+}
+
+// Story 5 & 8: Handle view trip menu option
+void handleViewTrip(Stop* trip[], int speed) {
+    cout << "\n--- Current Trip ---" << endl;
+    
+    // Count stops first
+    int stopCount = 0;
+    for (int i = 0; i < MAX_STOPS && trip[i] != nullptr; i++) {
+        stopCount++;
+    }
+    
+    if (stopCount == 0) {
+        cout << "No stops added to the trip yet." << endl;
+        return;
+    }
+    
+    // Display table header
+    cout << "\nStop\tLocation\tDistance (miles)\tTime (minutes)" << endl;
+    cout << "-----------------------------------" << endl;
+    
+    // Starting point
+    Stop startPoint = {0, 0};
+    Stop previousPoint = startPoint;
+    
+    double totalDistance = 0.0;
+    int totalTime = 0;
+    
+    // Display each stop
+    for (int i = 0; i < stopCount; i++) {
+        Stop currentStop = *(trip[i]);
+        
+        // Calculate distance from previous point
+        double distance = calculateDistance(previousPoint, currentStop);
+        
+        // Calculate time in minutes and round up
+        double timeHours = distance / speed;
+        int timeMinutes = static_cast<int>(ceil(timeHours * 60));
+        
+        // Update totals
+        totalDistance += distance;
+        totalTime += timeMinutes;
+        
+        // Display stop information
+        cout << setw(4) << (i + 1) << "\t";
+        cout << "(" << setw(3) << currentStop.x << ", " << setw(3) << currentStop.y << ")\t";
+        cout << fixed << setprecision(2) << setw(14) << distance << "\t\t";
+        cout << setw(13) << timeMinutes << endl;
+        
+        previousPoint = currentStop;
+    }
+
+
+//NOTE:it compiles when i threw this here...i still have no idea if this is even where it goes
+//too tired to figure it out now on the small screen
+}
+
