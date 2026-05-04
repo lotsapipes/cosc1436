@@ -90,12 +90,141 @@ bool isValidPosition(int x, int y);
 //NOTE: doesn't compile because of a dropped {} somewhere. (i threw one at the very end as a guess, see below)
 //-----------------------------------------------------------------------------------------------------
 
-int main(){
+// Story 4 specific
+void handleAddStop(Stop* trip[]);
 
+// Story 5 specific
+void handleViewTrip(Stop* trip[], int speed);
 
+// Story 6 specific
+// double check slots
+Stop* findStopByNumber(Stop* trip[], int stopNumber);
+void removeStopFromTrip(Stop* trip[], Stop* stopToRemove);
+void compactArray(Stop* stops[], int size, int startIndex);
+void handleRemoveStop(Stop* trip[]);
+
+// Story 7 specific
+void clearTrip(Stop* trip[]);
+void handleClearTrip(Stop* trip[]);
+
+// Story 8 specific
+int getSpeed();
+double calculateDistance(const Stop& point1, const Stop& point2);
+
+int main() {
+    // Story 3: Create trip array
+    Stop* trip[MAX_STOPS] = {nullptr};  // Initialize all to null pointers, no clue if this was in class
+    int stopCount = 0;  // Track number of stops
+    
+    // Story 8: Get speed at program start
+    int speed = getSpeed();
+    
+    bool continueRunning = true;
+    
+    while (continueRunning) {
+        displayMainMenu();
+        int choice = getMenuChoice();
+        continueRunning = handleMenuChoice(choice, trip, stopCount, speed);
+        
+        if (continueRunning) {
+            waitForEnter();
+        }
+    }
+    
+    // Clean up any remaining stops before exiting
+    clearTrip(trip);
+    
+    cout << "\nExiting " << endl;
+    return 0;
+}
+
+// Story 2: Display main menu
+void displayMainMenu() {
+    cout << "\n=== Trip Planner Main Menu ===" << endl;
+    cout << "1. Add Stop" << endl;
+    cout << "2. View Trip" << endl;
+    cout << "3. Remove Stop" << endl;
+    cout << "4. Clear Trip" << endl;
+    cout << "5. Quit" << endl;
+    cout << "================================" << endl;
+    cout << "Enter your choice: ";
+}
+
+// Story 2: Get and validate menu choice
+int getMenuChoice() {
+    string input;
+    cin >> input;
+    
+    if (input.length() == 1 && isdigit(input[0])) {
+        int choice = input[0] - '0';
+        if (choice >= 1 && choice <= 5) {
+            return choice;
+        }
+    }
+    
+    cout << "Invalid input. Please enter a number between 1 and 5." << endl;
+    return 0;  // Invalid choice
+}
+
+// Story 2: Handle menu selection
+// double check slots
+bool handleMenuChoice(int choice, Stop* trip[], int& stopCount, int speed) {
+    switch (choice) {
+        case 1:  // Add Stop
+            handleAddStop(trip);
+            break;
+        case 2:  // View Trip
+            handleViewTrip(trip, speed);
+            break;
+        case 3:  // Remove Stop
+            handleRemoveStop(trip);
+            break;
+        case 4:  // Clear Trip
+            handleClearTrip(trip);
+            break;
+        case 5:  // Quit
+            if (confirmQuit()) {
+                return false;  // Exit the program
+            }
+            break;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+    }
+    return true;  // Continue running
+}
+
+// Story 2: Confirm quit with user
+bool confirmQuit() {
+    string response;
+    cout << "Are you sure you want to quit? (y/n): ";
+    cin >> response;
+    
+    if (tolower(response[0]) == 'y') {
+        return true;
+    }
+    return false;
+}
+
+// Helper function to wait for Enter key
+void waitForEnter() {
+    cout << "\nPress Enter to continue...";
+    cin.ignore();
+    cin.get();
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------------------
 // Story 3 & 4: Create a new stop
 Stop* createStop(int x, int y) {
     Stop* newStop = new Stop;
