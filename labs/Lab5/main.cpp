@@ -32,21 +32,13 @@ Doing stuff on step 6 about deleting pointers to clear memory and stuff
 // Spring 2026
 // COSC-1436-21005
 
-
-
-
-
 #include <iostream>
 #include <iomanip>
 #include <cmath>
 #include <cstring> //supposed to be a bit trickier, double check on this one
 #include <cctype> //easy converter
 
-//meh...it keeps coming up. i may just throw it in
-//horrible, horrible idea, retype everything.
-using namespace std;
-
-// Constants
+// Global Constants (I ended up liking using these, though it may be bad form for larger programs)
 const int MAX_STOPS = 100;
 const int MIN_X = -100;
 const int MAX_X = 100;
@@ -66,54 +58,36 @@ void displayMainMenu();
 int getMenuChoice();
 bool handleMenuChoice(int choice, Stop* trip[], int& stopCount, int speed);
 bool confirmQuit();
-void waitForEnter();
+void waitForEnter(); //this one was new
 
 // Story 3 & 4 (Trip array and adding stops)
 Stop* createStop(int x, int y);
 bool addStopToTrip(Stop* trip[], Stop* newStop);
 bool isValidPosition(int x, int y);
 
-
-// going to stop here and read more about pointers before i start writing a bunch of these
-
-
-// round 2 as they say on the streets
-// since we've got the basic outline for the global variables we're for sure going to use
-// and probably most of the function prototypes, we stuck to working on the backend functions
-// don't forget to check how to check history on GitHub (if we even can) to study the process we used for later
-// if not, it probably doesn't matter anyways since most of this will be from memory like everything else
-
-
-//everything below this line is functions with pointers. they're not too difficult but...
-//after rereading this i'm still a little fuzzy on how it works. study it again later, maybe,
-//but...we really need to focus on calculus this late in the semester.
-//NOTE: doesn't compile because of a dropped {} somewhere. (i threw one at the very end as a guess, see below)
-//-----------------------------------------------------------------------------------------------------
-
-// Story 4 specific
+// Story 4 specifics
 void handleAddStop(Stop* trip[]);
 
-// Story 5 specific
+// Story 5 specifics
 void handleViewTrip(Stop* trip[], int speed);
 
-// Story 6 specific
-// double check slots
+// Story 6 specifics
 Stop* findStopByNumber(Stop* trip[], int stopNumber);
 void removeStopFromTrip(Stop* trip[], Stop* stopToRemove);
 void compactArray(Stop* stops[], int size, int startIndex);
 void handleRemoveStop(Stop* trip[]);
 
-// Story 7 specific
+// Story 7 specifics
 void clearTrip(Stop* trip[]);
 void handleClearTrip(Stop* trip[]);
 
-// Story 8 specific
+// Story 8 specifics
 int getSpeed();
 double calculateDistance(const Stop& point1, const Stop& point2);
 
 int main() {
     // Story 3: Create trip array
-    Stop* trip[MAX_STOPS] = {nullptr};  // Initialize all to null pointers, no clue if this was in class
+    Stop* trip[MAX_STOPS] = {nullptr};  // Initialize all to null pointers, turns out knowing where brackets goes comes in handy later with vectors and other stuff
     int stopCount = 0;  // Track number of stops
     
     // Story 8: Get speed at program start
@@ -134,26 +108,26 @@ int main() {
     // Clean up any remaining stops before exiting
     clearTrip(trip);
     
-    cout << "\nExiting " << endl;
+    std::cout << "\nExiting Program =)" << std::endl;
     return 0;
 }
 
 // Story 2: Display main menu
 void displayMainMenu() {
-    cout << "\n=== Trip Planner Main Menu ===" << endl;
-    cout << "1. Add Stop" << endl;
-    cout << "2. View Trip" << endl;
-    cout << "3. Remove Stop" << endl;
-    cout << "4. Clear Trip" << endl;
-    cout << "5. Quit" << endl;
-    cout << "================================" << endl;
-    cout << "Enter your choice: ";
+    std::cout << "\n=== Trip Planner Main Menu ===" << std::endl;
+    std::cout << "1. Add Stop" << std::endl;
+    std::cout << "2. View Trip" << std::endl;
+    std::cout << "3. Remove Stop" << std::endl;
+    std::cout << "4. Clear Trip" << std::endl;
+    std::cout << "5. Quit" << std::endl;
+    std::cout << "================================" << std::endl;
+    std::cout << "Enter your choice: ";
 }
 
 // Story 2: Get and validate menu choice
 int getMenuChoice() {
-    string input;
-    cin >> input;
+    std::string input;
+    std::cin >> input;
     
     if (input.length() == 1 && isdigit(input[0])) {
         int choice = input[0] - '0';
@@ -162,7 +136,7 @@ int getMenuChoice() {
         }
     }
     
-    cout << "Invalid input. Please enter a number between 1 and 5." << endl;
+    std::cout << "Invalid input. Please enter a number between 1 and 5." << std::endl;
     return 0;  // Invalid choice
 }
 
@@ -188,16 +162,16 @@ bool handleMenuChoice(int choice, Stop* trip[], int& stopCount, int speed) {
             }
             break;
         default:
-            cout << "Invalid choice. Please try again." << endl;
+            std::cout << "Invalid choice. Please try again." << std::endl;
     }
     return true;  // Continue running
 }
 
 // Story 2: Confirm quit with user
 bool confirmQuit() {
-    string response;
-    cout << "Are you sure you want to quit? (y/n): ";
-    cin >> response;
+    std::string response;
+    std::cout << "Are you sure you want to quit? (y/n): ";
+    std::cin >> response;
     
     if (tolower(response[0]) == 'y') {
         return true;
@@ -207,29 +181,19 @@ bool confirmQuit() {
 
 // Helper function to wait for Enter key
 void waitForEnter() {
-    cout << "\nPress Enter to continue...";
-    cin.ignore();
-    cin.get();
+    std::cout << "\nPress Enter to continue...";
+    std::cin.ignore();
+    std::cin.get(); 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //---------------------------------------------------------------------------------------------------
 // Story 3 & 4: Create a new stop
 Stop* createStop(int x, int y) {
     Stop* newStop = new Stop;
-    newStop->x = x; //new operators here, double check on these
-    newStop->y = y; //new operators here, double check on these
+    // Arrow Operators are used when we have a Pointer to an Object
+    // Instead of Dot Operators which are used when we have an Object
+    newStop->x = x; //Arrow Operator, this is shorthand for (*newStop).x
+    newStop->y = y; //Arrow Operator, this is shorthand for (*newStop).y
     return newStop;
 }
 
@@ -253,23 +217,23 @@ bool addStopToTrip(Stop* trip[], Stop* newStop) {
 // Story 4: Handle add stop menu option
 void handleAddStop(Stop* trip[]) {
     int x, y;
-    string input;
+    std::string input;
     
-    cout << "\n--- Add New Stop ---" << endl;
+    std::cout << "\n--- Add New Stop ---" << std::endl;
     
     // Get X coordinate
-    cout << "Enter X coordinate (-100 to 100): ";
-    cin >> input;
+    std::cout << "Enter X coordinate (-100 to 100): ";
+    std::cin >> input;
     x = stoi(input);
     
     // Get Y coordinate
-    cout << "Enter Y coordinate (-100 to 100): ";
-    cin >> input;
+    std::cout << "Enter Y coordinate (-100 to 100): ";
+    std::cin >> input;
     y = stoi(input);
     
     // Validate coordinates
     if (!isValidPosition(x, y)) {
-        cout << "Error: Coordinates must be between -100 and 100." << endl;
+        std::cout << "Error: Coordinates must be between -100 and 100." << std::endl;
         return;
     }
     
@@ -278,9 +242,9 @@ void handleAddStop(Stop* trip[]) {
     
     // Add to trip
     if (addStopToTrip(trip, newStop)) {
-        cout << "Stop (" << x << ", " << y << ") added successfully!" << endl;
+        std::cout << "Stop (" << x << ", " << y << ") added successfully." << std::endl;
     } else {
-        cout << "Error: Trip is full (maximum " << MAX_STOPS << " stops). Cannot add more stops." << endl;
+        std::cout << "Error: Trip is full (maximum " << MAX_STOPS << " stops). Cannot add more stops." << std::endl;
         delete newStop;  // Clean up allocated memory
     }
 }
@@ -288,15 +252,15 @@ void handleAddStop(Stop* trip[]) {
 // Story 8: Get speed from user
 int getSpeed() {
     int speed;
-    string input;
+    std::string input;
     
     do {
-        cout << "Enter the speed (1-60 miles per hour): ";
-        cin >> input;
-        speed = stoi(input); //finally the stuff from class starts to match up and we can use it
+        std::cout << "Enter the speed (1-60 miles per hour): ";
+        std::cin >> input;
+        speed = std::stoi(input); //finally the stuff from class starts to match up and we can use it
         
         if (speed < MIN_SPEED || speed > MAX_SPEED) {
-            cout << "Error: Speed must be between " << MIN_SPEED << " and " << MAX_SPEED << " mph." << endl;
+            std::cout << "Error: Speed must be between " << MIN_SPEED << " and " << MAX_SPEED << " mph." << std::endl;
         }
     } while (speed < MIN_SPEED || speed > MAX_SPEED);
     
@@ -305,14 +269,15 @@ int getSpeed() {
 
 // Story 8: Calculate distance between two points
 double calculateDistance(const Stop& point1, const Stop& point2) {
-    int dx = point2.x - point1.x; //not sure if i really like these variable names since dx/dy are real terms...but i can't think of anything else
-    int dy = point2.y - point1.y;
+    int dx = point2.x - point1.x; // It's worth noting that programmer's write Delta X as dx...
+    int dy = point2.y - point1.y; // In calculus though dx does not mean Delta X
+    // Still though, we're programming so we'll do as programmer's do:
     return sqrt(dx*dx + dy*dy);
 }
 
 // Story 5 & 8: Handle view trip menu option
 void handleViewTrip(Stop* trip[], int speed) {
-    cout << "\n--- Current Trip ---" << endl;
+    std::cout << "\n--- Current Trip ---" << std::endl;
     
     // Count stops first
     int stopCount = 0;
@@ -321,16 +286,16 @@ void handleViewTrip(Stop* trip[], int speed) {
     }
     
     if (stopCount == 0) {
-        cout << "No stops added to the trip yet." << endl;
+        std::cout << "No stops added to the trip yet." << std::endl;
         return;
     }
     
     // Display table header
-    cout << "\nStop\tLocation\tDistance (miles)\tTime (minutes)" << endl;
-    cout << "-----------------------------------" << endl;
+    std::cout << "\nStop\tLocation\tDistance (miles, per stop)\tTime (minutes, per stop)" << std::endl;
+    std::cout << "-----------------------------------" << std::endl;
     
     // Starting point
-    Stop startPoint = {0, 0};
+    Stop startPoint = {0, 0}; // Note the brackets again
     Stop previousPoint = startPoint;
     
     double totalDistance = 0.0;
@@ -352,28 +317,19 @@ void handleViewTrip(Stop* trip[], int speed) {
         totalTime += timeMinutes;
         
         // Display stop information
-        cout << setw(4) << (i + 1) << "\t";
-        cout << "(" << setw(3) << currentStop.x << ", " << setw(3) << currentStop.y << ")\t";
-        cout << fixed << setprecision(2) << setw(14) << distance << "\t\t";
-        cout << setw(13) << timeMinutes << endl;
+        std::cout << std::setw(4) << (i + 1) << "\t";
+        std::cout << "(" << std::setw(3) << currentStop.x << ", " << std::setw(3) << currentStop.y << ")\t";
+        std::cout << std::fixed << std::setprecision(2) << std::setw(14) << distance << "\t\t";
+        std::cout << std::setw(13) << timeMinutes << std::endl;
         
         previousPoint = currentStop;
     }
 
-
-//NOTE:it compiles when i threw this here...i still have no idea if this is even where it goes
-//too tired to figure it out now on the small screen
-
-
-
-
-//-----------------------------------------------------------------------------------------
-//our last writeup will be below this line. after that we'll have to polish everything at some point
-
 //Display totals
 std::cout << "-----------------------------------" << std::endl;
-std::cout << setw(4) << stopCount << "/t/t/t/t"; //double check this
-std::cout << setw(13) << totalTime << std::endl;
+std::cout << std::setw(4) << "Total Stops: " << stopCount << " stops" << std::endl;
+std::cout << std::setw(4) << "Total Time: " << totalTime << " minutes" << std::endl;
+std::cout << std::setw(4) << "Total Distance :" << totalDistance << " miles" << std::endl;
 }
 
 // Story 6: Find stop by number
@@ -382,8 +338,7 @@ Stop *findStopByNumber(Stop* trip[], int stopNumber) {
         return nullptr; // Invalid stop number
     }
 
-int index = stopNumber - 1; // converting to zero based
-//double check again
+int index = stopNumber - 1; // converting to Zero-Based (basically putting the array at 0)
 
 // Checking if the index is within bounds and the stop exists
 if (index < MAX_STOPS && trip[index] != nullptr) {
@@ -394,7 +349,7 @@ if (index < MAX_STOPS && trip[index] != nullptr) {
 return nullptr;
 }
 
-// Story 6: Compacting the array after removal
+// Story 6: Compacting the array after removal (copied from Canvas Instructions)
 void compactArray(Stop* stops[], int size, int startIndex) {
     int newIndex = startIndex;
     for (int index = startIndex + 1; index < size; ++ index) {
@@ -448,12 +403,12 @@ void handleRemoveStop(Stop* trip[]) {
         return;
     }
 
-    //Get stop number from the user
+    // Get stop number from the user
     int stopNumber;
-    string input;
-    std::cout << "Enter stop number to remove (1-" << stopCount << "): "; //let's the user know how many they have
+    std::string input;
+    std::cout << "Enter stop number to remove (1-" << stopCount << "): "; // let's the user know how many they have
     std::cin >> input;
-    stopNumber = stoi(input); //went over stoi in class, can't remember what it stands for; string to something?
+    stopNumber = std::stoi(input);
 
     // Find the stop
     Stop* stopToRemove = findStopByNumber(trip, stopNumber);
@@ -463,7 +418,7 @@ void handleRemoveStop(Stop* trip[]) {
         return;
     }
 
-    //Remove the stop
+    // Remove the stop
     removeStopFromTrip(trip, stopToRemove);
     std::cout << "Stop " << stopNumber << " removed successfully." << std::endl;
 }
@@ -482,7 +437,7 @@ void clearTrip(Stop* trip[]) {
 void handleClearTrip(Stop* trip[]) {
     std::cout << "\n--- Clear Trip ---" << std::endl;
 
-    //Confirming with the user
+    // Confirming with the user
     std::string response;
     std::cout << "Are you sure you want to clear all stops? (y/n): ";
     std::cin >> response;
