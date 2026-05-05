@@ -363,5 +363,135 @@ void handleViewTrip(Stop* trip[], int speed) {
 
 //NOTE:it compiles when i threw this here...i still have no idea if this is even where it goes
 //too tired to figure it out now on the small screen
+
+
+
+
+//-----------------------------------------------------------------------------------------
+//our last writeup will be below this line. after that we'll have to polish everything at some point
+
+//Display totals
+std::cout << "-----------------------------------" << std::endl;
+std::cout << setw(4) << stopCount << "/t/t/t/t"; //double check this
+std::cout << setw(13) << totalTime << std::endl;
 }
 
+// Story 6: Find stop by number
+Stop *findStopByNumber(Stop* trip[], int stopNumber) {
+    if (stopNumber <1) {
+        return nullptr; // Invalid stop number
+    }
+
+int index = stopNumber - 1; // converting to zero based
+//double check again
+
+// Checking if the index is within bounds and the stop exists
+if (index < MAX_STOPS && trip[index] != nullptr) {
+
+    return trip[index];
+}
+
+return nullptr;
+}
+
+// Story 6: Compacting the array after removal
+void compactArray(Stop* stops[], int size, int startIndex) {
+    int newIndex = startIndex;
+    for (int index = startIndex + 1; index < size; ++ index) {
+        stops[newIndex] = stops[index];
+        ++newIndex;
+
+        if (!stops[index])
+        return;
+    }
+}
+
+//Story 6: Remove specific stop from trip
+void removeStopFromTrip(Stop* trip[], Stop* stopToRemove) {
+    if (stopToRemove == nullptr) {
+        return;
+    }
+
+    // Find the stop in the array
+    int index = -1;
+    for (int i = 0; i < MAX_STOPS; i++) {
+        if (trip[i] == stopToRemove){
+            index = i;
+            break;
+        }
+    }
+    if (index == -1){
+        return; //This means the stop wasn't found
+    }
+
+    // Deleting the stop pointer
+    delete trip[index];
+    trip[index] = nullptr;
+
+    // Compacting the array again
+    compactArray(trip, MAX_STOPS, index);
+}
+
+// Story 6: Handling Stop in the menu
+
+void handleRemoveStop(Stop* trip[]) {
+    std::cout << "\n--- Remove Stop ---" << std::endl;
+
+    // First, checking to see if there even are any stops
+    int stopCount = 0;
+    for (int i = 0; i < MAX_STOPS && trip[i] != nullptr; i++) {
+        stopCount++;
+    }
+
+    if (stopCount == 0) {
+        std::cout << "No stops to remove." << std::endl;
+        return;
+    }
+
+    //Get stop number from the user
+    int stopNumber;
+    string input;
+    std::cout << "Enter stop number to remove (1-" << stopCount << "): "; //let's the user know how many they have
+    std::cin >> input;
+    stopNumber = stoi(input); //went over stoi in class, can't remember what it stands for; string to something?
+
+    // Find the stop
+    Stop* stopToRemove = findStopByNumber(trip, stopNumber);
+
+    if(stopToRemove == nullptr) {
+        std::cout << "Error: Stop number " << stopNumber << " does not exist." << std::endl;
+        return;
+    }
+
+    //Remove the stop
+    removeStopFromTrip(trip, stopToRemove);
+    std::cout << "Stop " << stopNumber << " removed successfully." << std::endl;
+}
+
+// Story 7: Clear all stops from trip
+void clearTrip(Stop* trip[]) {
+    for (int i = 0; i< MAX_STOPS; i++) {
+        if (trip[i] != nullptr) {
+            delete trip[i];
+            trip[i] = nullptr;
+        }
+    }
+}
+
+// Story 7: Handle clear trip menu option
+void handleClearTrip(Stop* trip[]) {
+    std::cout << "\n--- Clear Trip ---" << std::endl;
+
+    //Confirming with the user
+    std::string response;
+    std::cout << "Are you sure you want to clear all stops? (y/n): ";
+    std::cin >> response;
+
+    if(tolower(response[0]) == 'y') {
+        clearTrip(trip);
+        std::cout << "Trip has been sucessfully cleared." << std::endl;
+    }
+    else {
+        std::cout << "Clear trip cancelled." << std::endl;
+    }
+}
